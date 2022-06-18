@@ -46,13 +46,13 @@ public class Ex_4 {
                     : "População: 22.126 | Festa: festa do divino | IDH:0,573";
         } else if( selecionaEstado == 2 ){
             informacoesDaCidade = selecionarCidade == 1
-                    ? "População: 1.393.399 | Festa: Círio de Nazaré | IDH:0,727"
-                    : "População: 287.664 | Festa: Tambor-de-Malta | IDH:0,668";
+                    ? "População: 1.393.399 | Festa: Círio de Nazaré | IDH:0.727"
+                    : "População: 287.664 | Festa: Tambor-de-Malta | IDH:0.668";
         }
         else {
             informacoesDaCidade = selecionarCidade == 1
-                    ? "População: 871.126 | Festa: festa junina | IDH:0,751"
-                    : "População: 153.863 | Festa: Festejo de São Francisco | IDH:0,687";
+                    ? "População: 871.126 | Festa: festa junina | IDH:0.751"
+                    : "População: 153.863 | Festa: Festejo de São Francisco | IDH:0.687";
         }
 
         System.out.println("Informações da cidade: " + informacoesDaCidade);
