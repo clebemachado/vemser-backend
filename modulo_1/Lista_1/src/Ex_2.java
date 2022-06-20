@@ -30,11 +30,11 @@ public class Ex_2 {
         System.out.println("");
 
         if (mediaDasNotas >= 7) {
-            System.out.println("Aluno aprovado.");
+            System.out.println("Aluno aprovado. Média: " + mediaDasNotas);
         } else if (mediaDasNotas > 5) {
-            System.out.println("Aluno em exame.");
+            System.out.println("Aluno em exame. Média: " + mediaDasNotas);
         } else {
-            System.out.println("Aluno reprovado.");
+            System.out.println("Aluno reprovado. Média: " + mediaDasNotas );
         }
 
     }
