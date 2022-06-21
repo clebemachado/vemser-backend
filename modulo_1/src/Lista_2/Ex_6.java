@@ -7,11 +7,14 @@ caso não haja será necessário exibir uma mensagem dizendo que não existe aqu
 determinado número digitado.
  */
 
+import java.util.Scanner;
+
 public class Ex_6 {
     public static void main(String[] args) {
         int[] valores = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-        int valorUser = 5;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Entre com um valor: ");
+        int valorUser = scanner.nextInt();
 
         boolean encontrado = false;
         for(int valor: valores){
