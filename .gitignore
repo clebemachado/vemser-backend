@@ -1,4 +1,5 @@
 .DS_Store
 .idea
 .out
-vemser-backend.iml
+.vemser-backend.iml
+./out/production/vemser-backend
