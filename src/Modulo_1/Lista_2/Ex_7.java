@@ -1,17 +1,21 @@
 package Modulo_1.Lista_2;
 
+import java.util.Scanner;
+
 /*
 Leia uma matriz 4 x 4, conte e escreva quantos valores maiores que 10 ela possui
  */
 public class Ex_7 {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[][] matrizNumeros = new int[4][4];
 
-        int[][] matrizNumeros = {
-                {1, 2, 3, 4},
-                {5, 6, 17, 18},
-                {9, 10, 11, 12},
-                {13, 14, 15, 16},
-        };
+        for(int i = 0; i < 4; i ++){
+            for(int j = 0; j < 4; j ++){
+                matrizNumeros[i][j] = scanner.nextInt();
+                scanner.nextLine();
+            }
+        }
 
         int contador = 0;
         for (int[] matrizes:matrizNumeros) {
