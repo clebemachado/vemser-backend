@@ -24,20 +24,9 @@ public class ContaCorrente {
         }
     }
 
-    boolean validarValor(Double valor){
-        // Usar para validar se o valor é negativo;
-        if(valor < 0 ){
-            System.out.println("Ops! Valor informado é negativo");
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     boolean sacar(Double valorParaSacar){
         // Sacar o valor
-        boolean valorNaoENegativo =  validarValor(valorParaSacar);
-        if(!valorNaoENegativo) return false;
+        if(valorParaSacar < 0) return false;
         return debitar(valorParaSacar);
     }
 
