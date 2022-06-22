@@ -43,12 +43,8 @@ public class ContaCorrente {
 
     boolean transferir(ContaCorrente contaCorrente, Double valorParaTransferir){
         // Transferência entre contas
-        if(valorParaTransferir < 0) return false;
-
-        boolean saldoSuficiente = debitar(valorParaTransferir);
-        if(saldoSuficiente){
-            contaCorrente.depositar(valorParaTransferir);
-            return  true;
+        if(debitar(valorParaTransferir)){
+            return contaCorrente.depositar(valorParaTransferir);
         }
         return false;
     }
