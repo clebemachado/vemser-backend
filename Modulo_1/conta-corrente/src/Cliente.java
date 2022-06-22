@@ -9,13 +9,13 @@ public class Cliente {
 
     void imprimirContatos(){
         for (Contato contato: contatos) {
-            if(contato != null) System.out.println(contato);
+            if(contato != null) contato.imprimirContato();
         }
     }
 
-    void imprimirEndereco(){
+    void imprimirEnderecos(){
         for (Endereco endereco: enderecos) {
-            if(endereco != null) System.out.println(endereco);
+            if(endereco != null) endereco.imprimirEndereco();
         }
     }
 

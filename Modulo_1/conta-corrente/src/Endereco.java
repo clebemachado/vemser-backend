@@ -9,8 +9,13 @@ public class Endereco {
     String estado;
     String pais;
 
+    void imprimirEndereco(){
+        System.out.println(this);
+    }
+
     @Override
     public String toString() {
+
         return "Endereco{" + "\n" +
                 "   tipo=" + tipo + ", \n" +
                 "   logradouro='" + logradouro + ", \n" +
