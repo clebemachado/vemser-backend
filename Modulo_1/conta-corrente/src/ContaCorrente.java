@@ -43,9 +43,7 @@ public class ContaCorrente {
 
     boolean depositar(Double valorParaDepositar){
         // Depositar o valor
-        boolean valorNaoENegativo = validarValor(valorParaDepositar);
-        if(!valorNaoENegativo) return false;
-
+        if(valorParaDepositar < 0) return false;
         saldo += valorParaDepositar;
         return true;
     }
@@ -56,8 +54,7 @@ public class ContaCorrente {
 
     boolean transferir(ContaCorrente contaCorrente, Double valorParaTransferir){
         // Transferência entre contas
-        boolean valorNaoENegativo =  validarValor(valorParaTransferir);
-        if(!valorNaoENegativo) return false;
+        if(valorParaTransferir < 0) return false;
 
         boolean saldoSuficiente = debitar(valorParaTransferir);
         if(saldoSuficiente){
