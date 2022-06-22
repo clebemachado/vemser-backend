@@ -16,16 +16,10 @@ public class ContaCorrente {
 
     boolean debitar(Double valorParaDebitar){
         // Usar para transferência, sacar e debitar
-        if(saldo >= valorParaDebitar){
+        if(valorParaDebitar <= retornarSaldoComChequeEspecial() && valorParaDebitar > 0){
             saldo -= valorParaDebitar;
             return true;
         } else {
-            boolean temSaldoComChequeEspecial =
-                    retornarSaldoComChequeEspecial() - valorParaDebitar >= 0;
-            if(temSaldoComChequeEspecial){
-                saldo -= valorParaDebitar;
-                return true;
-            }
             return false;
         }
     }
