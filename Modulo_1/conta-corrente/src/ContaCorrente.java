@@ -26,7 +26,6 @@ public class ContaCorrente {
 
     boolean sacar(Double valorParaSacar){
         // Sacar o valor
-        if(valorParaSacar < 0) return false;
         return debitar(valorParaSacar);
     }
 
