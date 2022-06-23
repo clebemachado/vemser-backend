@@ -13,16 +13,12 @@ public class ContaCorrente extends Conta implements Impressao {
         this.chequeEspecial = chequeEspecial;
     }
 
-    public Double getChequeEspecial() {
-        return chequeEspecial;
-    }
-
     public void setChequeEspecial(Double chequeEspecial) {
         this.chequeEspecial = chequeEspecial;
     }
 
     Double retornarSaldoComChequeEspecial(){
-        return getSaldo() + getChequeEspecial();
+        return getSaldo() + chequeEspecial;
     }
 
     @Override
@@ -40,7 +36,7 @@ public class ContaCorrente extends Conta implements Impressao {
         System.out.println("-------------------------------------");
         System.out.println("Cliente: " + getCliente().getNome() + " | Tipo de conta: Corrente");
         System.out.println("Agencia: " + getAgencia() + " | Conta: " + getNumeroConta());
-        System.out.println("Saldo: " + getSaldo() + " | Cheque especial: " + getChequeEspecial());
+        System.out.println("Saldo: " + getSaldo() + " | Cheque especial: " + chequeEspecial);
         System.out.println("-------------------------------------");
     }
 }
