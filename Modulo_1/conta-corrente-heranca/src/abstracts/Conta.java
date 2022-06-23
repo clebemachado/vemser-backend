@@ -54,7 +54,7 @@ public abstract class Conta implements Movimentacao {
     @Override
     public boolean sacar(Double valor) {
         if(saldo >= valor && valor > 0){
-            saldo -= valor;
+            setSaldo(getSaldo() - valor);
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ public abstract class Conta implements Movimentacao {
     @Override
     public boolean depositar(Double valor) {
         if(valor > 0){
-            saldo += valor;
+            setSaldo(getSaldo() + valor);
             return true;
         }
         return false;
