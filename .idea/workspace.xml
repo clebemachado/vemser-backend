@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7ccc735d-dfe8-44ba-9a28-7a76fda681bb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_1/Ex_9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/vemser-backend/Modulo_1/Lista_2/Ex_8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_10.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_5.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_6.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_7.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_8.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_1/Ex_9.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_4.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_5.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_6.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_7.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modulo_1/Lista_2/Ex_8.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vemser-backend.iml" beforeDir="false" />
-    </list>
+    <list default="true" id="7ccc735d-dfe8-44ba-9a28-7a76fda681bb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,6 +25,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Modulo_1" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.0" />

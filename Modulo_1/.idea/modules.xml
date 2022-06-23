@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Lista_1/Lista_1.iml" filepath="$PROJECT_DIR$/Lista_1/Lista_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lista_2/Lista_2.iml" filepath="$PROJECT_DIR$/Lista_2/Lista_2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Modulo_1.iml" filepath="$PROJECT_DIR$/.idea/Modulo_1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/conta-corrente/conta-corrente.iml" filepath="$PROJECT_DIR$/conta-corrente/conta-corrente.iml" />
+      <module fileurl="file://$PROJECT_DIR$/conta-corrente-heranca/conta-corrente-heranca.iml" filepath="$PROJECT_DIR$/conta-corrente-heranca/conta-corrente-heranca.iml" />
+    </modules>
+  </component>
+</project>
