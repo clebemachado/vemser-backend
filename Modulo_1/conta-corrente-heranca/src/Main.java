@@ -24,7 +24,6 @@ public class Main {
         imprimirTesteDeposito(teste);
         contaMaria.imprimir();
 
-        System.out.println("========================================");
 
         // Teste sacar + creditar
         System.out.println("========================================");
@@ -34,7 +33,6 @@ public class Main {
         contaJuliana.creditarTaxa();
         contaJuliana.imprimir();
         contaJuliana.depositar(100.00);
-        System.out.println("========================================");
 
         // Teste sacar normal
         System.out.println("========================================");
@@ -45,7 +43,6 @@ public class Main {
         // Teste sacar mais do que o limite do cheque especial
         teste = contaMaria.sacar(20.00);
         imprimirTesteSaque(teste);
-        System.out.println("========================================");
 
 
         // Teste transferir
