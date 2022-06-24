@@ -57,7 +57,9 @@ public class Cliente {
     }
 
     public void setContatos(ArrayList<Contato> contatos) {
-        this.contatos = contatos;
+        if(contatos != null){
+            this.contatos = contatos;
+        }
     }
 
     public ArrayList<Endereco> getEnderecos() {
@@ -65,7 +67,9 @@ public class Cliente {
     }
 
     public void setEnderecos(ArrayList<Endereco> enderecos) {
-        this.enderecos = enderecos;
+        if(enderecos != null){
+            this.enderecos = enderecos;
+        }
     }
 
     @Override
