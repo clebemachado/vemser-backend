@@ -17,11 +17,13 @@ public class Cliente {
     }
 
     void imprimirContatos(){
+
         for (Contato contato: contatos) {
             if(contato != null){
                 contato.imprimirContato();
             };
         }
+
     }
 
     void imprimirEnderecos(){
