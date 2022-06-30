@@ -16,7 +16,7 @@ WHERE e.CEP LIKE '%0';
 
 -- Selecionar todos os endereços que tenham números entre 1 e 100;
 SELECT * FROM VEM_SER.ENDERECO e 
-WHERE e.NUMERO BETWEEN 0 AND 100;
+WHERE e.NUMERO BETWEEN 1 AND 100;
 
 -- Selecionar todos os endereços que comecem por “RUA” e ordenar pelo cep de forma decrescente ;
 SELECT * FROM VEM_SER.ENDERECO e 
