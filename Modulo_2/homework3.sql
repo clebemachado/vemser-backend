@@ -1,0 +1,53 @@
+-- RIGHT OUTER JOIN
+
+-- Entre pessoa e contato
+SELECT * 
+	FROM PESSOA p 
+	RIGHT OUTER JOIN CONTATO c ON (c.ID_PESSOA = p.ID_PESSOA);
+
+-- Pessoa, Pessoa_x_Pessoa_Endereco e Endereco_Pessoa 
+SELECT *
+	FROM PESSOA p
+	RIGHT OUTER JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON (pxpe.ID_PESSOA = p.ID_PESSOA)
+	RIGHT OUTER JOIN ENDERECO_PESSOA ep ON (ep.ID_ENDERECO = pxpe.ID_ENDERECO);
+
+-- Todas as tabelas (Começando por pessoa)
+SELECT *
+	FROM PESSOA p
+	RIGHT OUTER JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON (pxpe.ID_PESSOA = p.ID_PESSOA)
+	RIGHT OUTER JOIN ENDERECO_PESSOA ep ON (ep.ID_ENDERECO = pxpe.ID_ENDERECO)
+	RIGHT OUTER JOIN CONTATO c ON (c.ID_PESSOA  = p.ID_PESSOA);
+
+-- FAZER O OUTER FULL JOIN
+
+-- Entre pessoa e contato
+SELECT * 
+	FROM PESSOA p 
+	FULL OUTER JOIN CONTATO c ON (c.ID_PESSOA = p.ID_PESSOA);
+
+-- Pessoa, Pessoa_x_Pessoa_Endereco e Endereco_Pessoa 
+SELECT *
+	FROM PESSOA p
+	FULL OUTER JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON (pxpe.ID_PESSOA = p.ID_PESSOA)
+	FULL OUTER JOIN ENDERECO_PESSOA ep ON (ep.ID_ENDERECO = pxpe.ID_ENDERECO);
+
+-- Todas as tabelas (Começando por pessoa)
+SELECT *
+	FROM PESSOA p
+	FULL OUTER JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON (pxpe.ID_PESSOA = p.ID_PESSOA)
+	FULL OUTER JOIN ENDERECO_PESSOA ep ON (ep.ID_ENDERECO = pxpe.ID_ENDERECO)
+	FULL OUTER JOIN CONTATO c ON (c.ID_PESSOA  = p.ID_PESSOA);
+
+-- Utilizar Exists / Pelo que entendi pode trazer todos os dados
+SELECT *
+FROM PESSOA p 
+WHERE EXISTS (SELECT pxpe.ID_PESSOA
+            FROM PESSOA_X_PESSOA_ENDERECO pxpe
+            WHERE pxpe.ID_PESSOA = p.ID_PESSOA)
+
+-- Union, se o número de colunas forem diferentes dará error
+SELECT p.ID_PESSOA, p.NOME
+	FROM PESSOA p
+UNION 
+SELECT enp.ID_ENDERECO, enp.LOGRADOURO
+	FROM ENDERECO_PESSOA enp
