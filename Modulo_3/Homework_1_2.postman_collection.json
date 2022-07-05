@@ -118,7 +118,19 @@
 					"name": "Get_ALL_Contatos",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato"
+							]
+						}
 					},
 					"response": []
 				},
@@ -154,9 +166,16 @@
 				},
 				{
 					"name": "GET_ONE_CONTATO",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://back-vemserdbc.herokuapp.com/contato/13",
 							"protocol": "https",
@@ -180,7 +199,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n        \"idContato\": 9,\r\n        \"idPessoa\": 13,\r\n        \"tipoContato\": \"RESIDENCIAL\",\r\n        \"numero\": \"889966554433\",\r\n        \"descricao\": \"telegram\"\r\n    }",
+							"raw": "{\r\n        \"idPessoa\": 13,\r\n        \"tipoContato\": \"COMERCIAL\",\r\n        \"numero\": \"889966554433\",\r\n        \"descricao\": \"telegram\"\r\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
