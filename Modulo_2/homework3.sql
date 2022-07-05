@@ -49,17 +49,11 @@ WHERE EXISTS(
 
 
 -- SELECIONAR ID, NOME, NOME DA TABELA PESSOA JUNTO COM ID, LOGRADOURO DA TABELA ENDEREÇO
-SELECT p.ID_PESSOA, p.Nome || p.ID_PESSOA, end_pess.Logradouro
-FROM PESSOA p, ENDERECO_PESSOA end_pess 
-WHERE 
-EXISTS (
-  SELECT * 
-  FROM 
-      PESSOA_X_PESSOA_ENDERECO pxpe  
-  WHERE 
-      p.ID_PESSOA = pxpe.ID_PESSOA
-)
+-- Preferi fazer com left msm, e as informações solicitadas!!!
 
-SELECT p.ID_PESSOA, p.Nome ||' - '|| p.ID_PESSOA AS Pessoa_ID, end_pess.LOGRADOURO  FROM PESSOA p
-JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON pxpe.ID_PESSOA = p.ID_PESSOA
-JOIN ENDERECO_PESSOA end_pess ON end_pess.ID_ENDERECO  = pxpe.ID_ENDERECO 
+SELECT p.ID_PESSOA, 
+	   p.NOME, p.ID_PESSOA ||' - '|| p.Nome ||' - '|| end_pess.LOGRADOURO AS Pessoa_ID_ENDERECO, 
+	   end_pess.LOGRADOURO 
+FROM PESSOA p
+LEFT JOIN PESSOA_X_PESSOA_ENDERECO pxpe ON pxpe.ID_PESSOA = p.ID_PESSOA
+LEFT JOIN ENDERECO_PESSOA end_pess ON end_pess.ID_ENDERECO  = pxpe.ID_ENDERECO 
