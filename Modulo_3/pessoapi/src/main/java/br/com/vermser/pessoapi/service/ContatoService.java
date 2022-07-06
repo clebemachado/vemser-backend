@@ -8,10 +8,12 @@ import java.util.List;
 
 public class ContatoService {
 
-    ContatoRepository contatoRepository;
+    private ContatoRepository contatoRepository;
+    private PessoaService pessoaService;
 
     public ContatoService() {
         contatoRepository = new ContatoRepository();
+        pessoaService = new PessoaService();
     }
 
     public List<Contato> listarContatos() {
@@ -31,7 +33,11 @@ public class ContatoService {
          contatoRepository.delete(idContato);
     }
 
-    public Contato create(Contato contato) {
+    public Contato create(Integer idPessoa, Contato contato) throws Exception {
+        pessoaService.getPessoa(idPessoa);
+        contato.setIdPessoa(idPessoa);
         return contatoRepository.create(contato);
     }
+
+
 }

@@ -55,6 +55,7 @@ public class ContatoRepository {
     }
 
     public Contato create(Contato contato) {
+
         contato.setIdContato(COUNTER.incrementAndGet());
         listaContatos.add(contato);
         return contato;

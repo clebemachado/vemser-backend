@@ -56,4 +56,8 @@ public class Contato {
     public Integer getIdPessoa() {
         return idPessoa;
     }
+
+    public void setIdPessoa(Integer idPessoa) {
+        this.idPessoa = idPessoa;
+    }
 }

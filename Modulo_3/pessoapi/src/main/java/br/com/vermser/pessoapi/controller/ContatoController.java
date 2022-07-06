@@ -36,9 +36,8 @@ public class ContatoController {
         contatoService.delete(idContato);
     }
 
-    @PostMapping
-    public Contato create(@RequestBody Contato contato) {
-        System.out.println("CONTATOS " + contato);
-        return contatoService.create(contato);
+    @PostMapping("/{idPessoa}")
+    public Contato create(@PathVariable Integer idPessoa, @RequestBody Contato contato) throws Exception {
+        return contatoService.create(idPessoa, contato);
     }
 }

@@ -41,7 +41,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://localhost:8080/contato/2",
+							"raw": "http://localhost:8080/contato/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -49,7 +49,7 @@
 							"port": "8080",
 							"path": [
 								"contato",
-								"2"
+								"5"
 							]
 						}
 					},
@@ -62,7 +62,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idPessoa\": 13,\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"545454\",\r\n    \"descricao\": \"telegram\"\r\n}",
+							"raw": "{\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"545454\",\r\n    \"descricao\": \"telegram\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,14 +70,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/contato",
+							"raw": "http://localhost:8080/contato/5",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"contato"
+								"contato",
+								"5"
 							]
 						}
 					},
@@ -90,7 +91,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idPessoa\": 2,\r\n    \"numero\": 7654321,\r\n    \"descricao\": \"Comercial\",\r\n    \"tipoContato\": \"COMERCIAL\"\r\n}",
+							"raw": "{\r\n    \"numero\": 7654321,\r\n    \"descricao\": \"Comercial\",\r\n    \"tipoContato\": \"COMERCIAL\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

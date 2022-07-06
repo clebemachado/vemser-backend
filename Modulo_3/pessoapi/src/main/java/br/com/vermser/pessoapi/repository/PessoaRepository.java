@@ -57,4 +57,12 @@ public class PessoaRepository {
                 .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
                 .collect(Collectors.toList());
     }
+
+    public Pessoa getPessoa(Integer idPessoa) throws Exception {
+        return listaPessoas.stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+    }
+
 }
