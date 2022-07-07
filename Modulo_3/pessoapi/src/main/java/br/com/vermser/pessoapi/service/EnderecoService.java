@@ -24,11 +24,15 @@ public class EnderecoService {
         return enderecoRepository.pegarTodosOsEnderecos();
     }
 
-    public Endereco pegarEndereco(Integer idEndereco) throws Exception {
+    private Endereco getEnderecoPorID(Integer idEndereco) throws Exception {
         return  enderecoRepository.getEnderecoList()
                 .stream().filter(e -> e.getIdEndereco().equals(idEndereco))
                 .findFirst()
                 .orElseThrow(() -> new Exception("Endereco não encontrado"));
+    }
+
+    public Endereco pegarEndereco(Integer idEndereco) throws Exception {
+        return  getEnderecoPorID(idEndereco);
     }
 
     public List<Endereco> pegarEnderecoPorPessoa(Integer idPessoa) throws Exception {
@@ -44,11 +48,7 @@ public class EnderecoService {
     }
 
     public Endereco update(Integer idEndereco, Endereco enderecoPut) throws Exception{
-        Endereco enderecoRecuperado = enderecoRepository.getEnderecoList()
-                .stream()
-                .filter(e -> e.getIdEndereco().equals(idEndereco))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Endereco não econtrada"));
+        Endereco enderecoRecuperado = getEnderecoPorID(idEndereco);
 
         enderecoRecuperado.setCep(enderecoPut.getCep());
         enderecoRecuperado.setCidade(enderecoPut.getCidade());
