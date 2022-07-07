@@ -1,21 +1,21 @@
 package br.com.vermser.pessoapi.controller;
 
 import br.com.vermser.pessoapi.entity.Pessoa;
+import br.com.vermser.pessoapi.entity.PropertieReader;
 import br.com.vermser.pessoapi.service.PessoaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/pessoa")
 public class PessoaController {
-
+    @Autowired
     private PessoaService pessoaService;
 
-    public PessoaController() {
-        this.pessoaService = new PessoaService();
-    }
+    @Autowired
+    private PropertieReader propertieReader;
 
     @GetMapping("/hello")
     public String hello(){
@@ -46,6 +46,11 @@ public class PessoaController {
     @GetMapping("/byname") //pessoa/byname?nome=Rafa
     public List<Pessoa> listByName(@RequestParam("nome") String nome) {
         return pessoaService.listByName(nome);
+    }
+
+    @GetMapping("/getpropertie")
+    public String getPropertieReader(){
+        return propertieReader.getNome();
     }
 
 
