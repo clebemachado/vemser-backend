@@ -63,12 +63,7 @@ public class EnderecoService {
     }
 
     public void delete(Integer idEndereco) throws Exception {
-        Endereco enderecoRecuperado = enderecoRepository.getEnderecoList()
-                .stream()
-                .filter(e -> e.getIdEndereco().equals(idEndereco))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Endereco não econtrada"));
-        enderecoRepository.getEnderecoList().remove(enderecoRecuperado);
+        enderecoRepository.getEnderecoList().remove(getEnderecoPorID(idEndereco));
     }
 
 }

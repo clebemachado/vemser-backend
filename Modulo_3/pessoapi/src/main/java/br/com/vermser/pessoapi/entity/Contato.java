@@ -2,13 +2,20 @@ package br.com.vermser.pessoapi.entity;
 
 import br.com.vermser.pessoapi.enums.TipoContato;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
+    @NotNull
+    @Max(13)
     private Integer numero;
+    @NotEmpty
     private String descricao;
-
+    @NotNull
     private TipoContato tipoContato;
 
     public Contato() {}

@@ -4,12 +4,17 @@ import br.com.vermser.pessoapi.entity.Pessoa;
 import br.com.vermser.pessoapi.entity.PropertieReader;
 import br.com.vermser.pessoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pessoa")
+@Validated
 public class PessoaController {
     @Autowired
     private PessoaService pessoaService;
@@ -23,8 +28,9 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa){
-        return pessoaService.create(pessoa);
+    public ResponseEntity<Pessoa> create(@Valid @RequestBody Pessoa pessoa){
+        //return ResponseEntity.ok(pessoaService.create(pessoa));
+        return new ResponseEntity(pessoaService.create(pessoa), HttpStatus.OK);
     }
 
     @GetMapping
@@ -34,7 +40,7 @@ public class PessoaController {
 
     @PutMapping("/{idPessoa}")
     public Pessoa update(@PathVariable Integer idPessoa,
-                         @RequestBody Pessoa pessoaAtualizar) throws Exception{
+                         @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception{
         return pessoaService.update(idPessoa, pessoaAtualizar);
     }
 

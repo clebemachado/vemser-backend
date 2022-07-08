@@ -3,14 +3,15 @@ package br.com.vermser.pessoapi.controller;
 import br.com.vermser.pessoapi.entity.Endereco;
 import br.com.vermser.pessoapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/endereco")
+@Validated
 public class EnderecosController {
 
     @Autowired
@@ -33,13 +34,13 @@ public class EnderecosController {
 
     @PostMapping("/{idPessoa}")
     public Endereco createEndereco(@PathVariable Integer idPessoa,
-                                   @RequestBody Endereco endereco) throws Exception {
+                                   @Valid @RequestBody Endereco endereco) throws Exception {
         return enderecoService.createEndereco(idPessoa, endereco);
     }
 
     @PutMapping("/{idEndereco}")
     public Endereco update(@PathVariable Integer idEndereco,
-                           @RequestBody Endereco enderecoPut) throws Exception{
+                           @Valid @RequestBody Endereco enderecoPut) throws Exception{
 
         return enderecoService.update(idEndereco, enderecoPut);
     }
