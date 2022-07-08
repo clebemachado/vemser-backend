@@ -9,7 +9,7 @@ public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
-    @NotNull
+    @NotEmpty
     @Size( max = 13)
     private String numero;
     @NotEmpty
