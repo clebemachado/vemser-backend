@@ -15,9 +15,9 @@ public class ContatoRepository {
     private AtomicInteger COUNTER = new AtomicInteger();
 
     public ContatoRepository() {
-        listaContatos.add(new Contato(COUNTER.incrementAndGet(), 1, 1234567,"Residencial", TipoContato.COMERCIAL));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet(), 1, 9874561,"Comercial", TipoContato.COMERCIAL));
-        listaContatos.add(new Contato(COUNTER.incrementAndGet(),2, 7654321,"Comercial", TipoContato.RESIDENCIAL));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet(), 1, "1234567","Residencial", TipoContato.COMERCIAL));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet(), 1, "9874561","Comercial", TipoContato.COMERCIAL));
+        listaContatos.add(new Contato(COUNTER.incrementAndGet(),2, "7654321","Comercial", TipoContato.RESIDENCIAL));
     }
 
     public static List<Contato> getListaContatos() {

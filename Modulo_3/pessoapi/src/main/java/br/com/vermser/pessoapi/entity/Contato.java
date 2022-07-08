@@ -1,18 +1,17 @@
 package br.com.vermser.pessoapi.entity;
 
 import br.com.vermser.pessoapi.enums.TipoContato;
+import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 public class Contato {
 
     private Integer idContato;
     private Integer idPessoa;
     @NotNull
-    @Max(13)
-    private Integer numero;
+    @Size( max = 13)
+    private String numero;
     @NotEmpty
     private String descricao;
     @NotNull
@@ -20,7 +19,7 @@ public class Contato {
 
     public Contato() {}
 
-    public Contato(Integer idContato, Integer idPessoa, Integer numero, String descricao, TipoContato tipoContato) {
+    public Contato(Integer idContato, Integer idPessoa, String numero, String descricao, TipoContato tipoContato) {
         this.idContato = idContato;
         this.idPessoa = idPessoa;
         this.numero = numero;
@@ -36,11 +35,11 @@ public class Contato {
         this.idContato = idContato;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 

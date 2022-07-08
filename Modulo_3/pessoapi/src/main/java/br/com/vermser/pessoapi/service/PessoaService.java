@@ -1,6 +1,7 @@
 package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.entity.Pessoa;
+import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.PessoaRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,7 @@ public class PessoaService {
     }
 
     public Pessoa update(Integer id, Pessoa pessoaAtualizar) throws Exception{
-        Pessoa pessoaRecuperada = pessoaRepository.getListaPessoas().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+        Pessoa pessoaRecuperada = getPessoa(id);
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
@@ -39,10 +37,7 @@ public class PessoaService {
     }
 
     public void delete(Integer id) throws Exception {
-        Pessoa pessoaRecuperada = pessoaRepository.getListaPessoas().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+        Pessoa pessoaRecuperada = getPessoa(id);
         pessoaRepository.getListaPessoas().remove(pessoaRecuperada);
     }
 
@@ -56,7 +51,7 @@ public class PessoaService {
         return pessoaRepository.getListaPessoas().stream()
                 .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não existe"));
     }
 
 }

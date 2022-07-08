@@ -2,6 +2,7 @@ package br.com.vermser.pessoapi.entity;
 
 import br.com.vermser.pessoapi.enums.TipoEndereco;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,7 +16,8 @@ public class Endereco {
     @NotEmpty
     @Size(max = 250)
     private String logradouro;
-    @NotEmpty
+    @NotNull
+    @Min(1)
     private Integer numero;
     private String complemento;
     @NotEmpty

@@ -1,6 +1,7 @@
 package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.entity.Contato;
+import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,11 +30,7 @@ public class ContatoService {
     }
 
     public Contato updateContato(Integer idContato, Contato novoContato) throws Exception {
-        Contato contatoRecuperado = contatoRepository.listarContatos().stream()
-                .filter(c -> c.getIdContato().equals(idContato))
-                .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
-
+        Contato contatoRecuperado = getContatoByID(idContato);
         contatoRecuperado.setTipoContato(novoContato.getTipoContato());
         contatoRecuperado.setDescricao(novoContato.getDescricao());
         contatoRecuperado.setNumero(novoContato.getNumero());
@@ -41,12 +38,15 @@ public class ContatoService {
         return contatoRecuperado;
     }
 
-    public void delete(Integer idContato) throws Exception {
-        Contato contatoRecuperado = contatoRepository.listarContatos().stream()
+    private Contato getContatoByID(Integer idContato) throws Exception {
+        return contatoRepository.listarContatos().stream()
                 .filter(c -> c.getIdContato().equals(idContato))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Pessoa não econtrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Contato não econtrada"));
+    }
 
+    public void delete(Integer idContato) throws Exception {
+        Contato contatoRecuperado = getContatoByID(idContato);
         contatoRepository.listarContatos().remove(contatoRecuperado);
     }
 

@@ -1,10 +1,8 @@
 package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.entity.Endereco;
-import br.com.vermser.pessoapi.entity.Pessoa;
-import br.com.vermser.pessoapi.enums.TipoEndereco;
+import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.EnderecoRepository;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +26,7 @@ public class EnderecoService {
         return  enderecoRepository.getEnderecoList()
                 .stream().filter(e -> e.getIdEndereco().equals(idEndereco))
                 .findFirst()
-                .orElseThrow(() -> new Exception("Endereco não encontrado"));
+                .orElseThrow(() -> new RegraDeNegocioException("Endereco não encontrado"));
     }
 
     public Endereco pegarEndereco(Integer idEndereco) throws Exception {
@@ -36,6 +34,7 @@ public class EnderecoService {
     }
 
     public List<Endereco> pegarEnderecoPorPessoa(Integer idPessoa) throws Exception {
+        pessoaService.getPessoa(idPessoa);
         return  enderecoRepository.getEnderecoList()
                 .stream().filter(e -> e.getIdPessoa().equals(idPessoa))
                 .collect(Collectors.toList());
