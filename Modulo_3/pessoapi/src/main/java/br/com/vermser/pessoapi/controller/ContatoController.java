@@ -2,7 +2,6 @@ package br.com.vermser.pessoapi.controller;
 
 import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
 import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
-import br.com.vermser.pessoapi.entity.Contato;
 import br.com.vermser.pessoapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
