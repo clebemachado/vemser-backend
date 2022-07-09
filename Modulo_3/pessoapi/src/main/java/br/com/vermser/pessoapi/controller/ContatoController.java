@@ -1,4 +1,4 @@
-package br.com.vermser.pessoapi.dto.controller;
+package br.com.vermser.pessoapi.controller;
 
 import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
 import br.com.vermser.pessoapi.dto.contato.ContatoDTO;

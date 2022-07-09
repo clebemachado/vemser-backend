@@ -1,4 +1,4 @@
-package br.com.vermser.pessoapi.dto.controller;
+package br.com.vermser.pessoapi.controller;
 
 import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
