@@ -6,7 +6,7 @@ public enum TipoEndereco {
     RESIDENCIAL(1),
     COMERCIAL(2);
 
-    private Integer tipo;
+    private final Integer tipo;
 
     TipoEndereco(Integer tipo) {
         this.tipo = tipo;

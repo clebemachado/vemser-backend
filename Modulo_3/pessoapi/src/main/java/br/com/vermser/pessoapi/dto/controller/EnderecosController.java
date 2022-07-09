@@ -1,5 +1,7 @@
-package br.com.vermser.pessoapi.controller;
+package br.com.vermser.pessoapi.dto.controller;
 
+import br.com.vermser.pessoapi.dto.enderecos.EnderecoCreateDTO;
+import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
 import br.com.vermser.pessoapi.entity.Endereco;
 import br.com.vermser.pessoapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,22 +11,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping(value = "/endereco")
-@Validated
 public class EnderecosController {
 
     @Autowired
     EnderecoService enderecoService;
 
     @GetMapping
-    public List<Endereco> pegarTodosOsEnderecos(){
+    public List<EnderecoDTO> pegarTodosOsEnderecos(){
         return enderecoService.pegarTodosOsEnderecos();
     }
 
     @GetMapping("/{idEndereco}")
-    public Endereco pegarEndereco(@PathVariable Integer idEndereco) throws Exception {
-        return enderecoService.pegarEndereco(idEndereco);
+    public EnderecoDTO pegarEnderecoPorID(@PathVariable Integer idEndereco) throws Exception {
+        return enderecoService.pegarEnderecoPorID(idEndereco);
     }
 
     @GetMapping("/{idPessoa}/pessoa")
@@ -33,16 +35,14 @@ public class EnderecosController {
     }
 
     @PostMapping("/{idPessoa}")
-    public Endereco createEndereco(@PathVariable Integer idPessoa,
-                                   @Valid @RequestBody Endereco endereco) throws Exception {
-        System.out.println("ID PESSOA" + idPessoa);
+    public EnderecoDTO createEndereco(@PathVariable Integer idPessoa,
+                                   @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception {
         return enderecoService.createEndereco(idPessoa, endereco);
     }
 
     @PutMapping("/{idEndereco}")
-    public Endereco update(@PathVariable Integer idEndereco,
-                           @Valid @RequestBody Endereco enderecoPut) throws Exception{
-
+    public EnderecoDTO update(@PathVariable Integer idEndereco,
+                           @Valid @RequestBody EnderecoCreateDTO enderecoPut) throws Exception{
         return enderecoService.update(idEndereco, enderecoPut);
     }
 
@@ -50,6 +50,5 @@ public class EnderecosController {
     public void delete(@PathVariable Integer idEndereco) throws Exception {
         enderecoService.delete(idEndereco);
     }
-
 
 }

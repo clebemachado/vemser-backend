@@ -1,5 +1,7 @@
-package br.com.vermser.pessoapi.controller;
+package br.com.vermser.pessoapi.dto.controller;
 
+import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
+import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
 import br.com.vermser.pessoapi.entity.Contato;
 import br.com.vermser.pessoapi.service.ContatoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,23 +14,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/contato")
 @Validated
+
 public class ContatoController {
     @Autowired
     ContatoService contatoService;
 
     @GetMapping
-    public List<Contato> listarContatos(){
+    public List<ContatoDTO> listarContatos(){
         return contatoService.listarContatos();
     }
 
     @GetMapping("/{idUser}")
-    public List<Contato> listById(@PathVariable Integer idUser) {
+    public List<ContatoDTO> listById(@PathVariable Integer idUser) {
         return contatoService.listById(idUser);
     }
 
+    @PostMapping("/{idPessoa}")
+    public ContatoDTO create(@PathVariable Integer idPessoa,
+                          @Valid @RequestBody ContatoCreateDTO contato) throws Exception {
+        return contatoService.create(idPessoa, contato);
+    }
+
     @PutMapping("/{idContato}")
-    public Contato updateContato(@PathVariable Integer idContato,
-                                 @Valid @RequestBody Contato novoContato) throws Exception {
+    public ContatoDTO updateContato(@PathVariable Integer idContato,
+                                 @Valid @RequestBody ContatoCreateDTO novoContato) throws Exception {
         return contatoService.updateContato(idContato, novoContato);
     }
 
@@ -37,9 +46,4 @@ public class ContatoController {
         contatoService.delete(idContato);
     }
 
-    @PostMapping("/{idPessoa}")
-    public Contato create(@PathVariable Integer idPessoa,
-                          @Valid @RequestBody Contato contato) throws Exception {
-        return contatoService.create(idPessoa, contato);
-    }
 }

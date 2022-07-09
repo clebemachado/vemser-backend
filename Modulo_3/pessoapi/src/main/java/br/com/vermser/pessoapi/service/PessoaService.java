@@ -1,9 +1,11 @@
 package br.com.vermser.pessoapi.service;
 
+import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
+import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
 import br.com.vermser.pessoapi.entity.Pessoa;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.PessoaRepository;
-import org.apache.commons.lang3.StringUtils;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,43 +17,64 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    /*public PessoaService(){
-        pessoaRepository = new PessoaRepository();
-    }*/
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    public Pessoa create(Pessoa pessoa){
-
-        return pessoaRepository.create(pessoa);
+    public Pessoa converterPessoaCreateParaPessoa(PessoaCreateDTO pessoa) {
+        return objectMapper.convertValue(pessoa, Pessoa.class);
     }
 
-    public List<Pessoa> list(){
-        return pessoaRepository.list();
+    public PessoaDTO converterPessoaParaPessoaDTO(Pessoa pessoa) {
+        return objectMapper.convertValue(pessoa, PessoaDTO.class);
     }
 
-    public Pessoa update(Integer id, Pessoa pessoaAtualizar) throws Exception{
-        Pessoa pessoaRecuperada = getPessoa(id);
-        pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
-        pessoaRecuperada.setNome(pessoaAtualizar.getNome());
-        pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-        return pessoaRecuperada;
+    public Pessoa buscarUsuarioPorId(Integer idPessoa) throws Exception {
+        return PessoaRepository.getListaPessoas()
+                .stream()
+                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
+                .findFirst()
+                .orElseThrow( () -> new RegraDeNegocioException("Pessoa com Id " + idPessoa
+                                + " não existe"));
     }
 
-    public void delete(Integer id) throws Exception {
-        Pessoa pessoaRecuperada = getPessoa(id);
-        pessoaRepository.getListaPessoas().remove(pessoaRecuperada);
+    public PessoaDTO getPessoaPorId(Integer idPessoa) throws Exception {
+        return converterPessoaParaPessoaDTO(buscarUsuarioPorId(idPessoa));
     }
 
-    public List<Pessoa> listByName(String nome){
-        return  pessoaRepository.getListaPessoas().stream()
-                .filter(pessoa -> pessoa.getNome().toUpperCase().contains(nome.toUpperCase()))
+    public List<PessoaDTO> list() {
+        return pessoaRepository.list()
+                .stream()
+                .map(this::converterPessoaParaPessoaDTO)
                 .collect(Collectors.toList());
     }
 
-    public Pessoa getPessoa(Integer idPessoa) throws Exception {
-        return pessoaRepository.getListaPessoas().stream()
-                .filter(pessoa -> pessoa.getIdPessoa().equals(idPessoa))
-                .findFirst()
-                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não existe"));
+    public List<PessoaDTO> listByName(String nome) {
+        return PessoaRepository
+                .getListaPessoas()
+                .stream()
+                .filter(pessoa -> pessoa.getNome()
+                        .toUpperCase()
+                        .contains(nome.toUpperCase()))
+                .map(this::converterPessoaParaPessoaDTO)
+                .collect(Collectors.toList());
+    }
+
+    public PessoaDTO create(PessoaCreateDTO pessoa) {
+        Pessoa pessoaEntity = converterPessoaCreateParaPessoa(pessoa);
+        return converterPessoaParaPessoaDTO(pessoaRepository.create(pessoaEntity));
+    }
+
+    public PessoaDTO update(Integer id, PessoaCreateDTO pessoaAtualizar) throws Exception {
+        Pessoa pessoaRecuperada = buscarUsuarioPorId(id);
+        pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
+        pessoaRecuperada.setNome(pessoaAtualizar.getNome());
+        pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
+        return converterPessoaParaPessoaDTO(pessoaRecuperada);
+    }
+
+    public void delete(Integer id) throws Exception {
+        Pessoa pessoaRecuperada = buscarUsuarioPorId(id);
+        PessoaRepository.getListaPessoas().remove(pessoaRecuperada);
     }
 
 }
