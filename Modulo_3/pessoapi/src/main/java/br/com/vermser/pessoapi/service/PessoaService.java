@@ -20,6 +20,9 @@ public class PessoaService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public Pessoa converterPessoaCreateParaPessoa(PessoaCreateDTO pessoa) {
         return objectMapper.convertValue(pessoa, Pessoa.class);
     }
@@ -61,7 +64,10 @@ public class PessoaService {
 
     public PessoaDTO create(PessoaCreateDTO pessoa) {
         Pessoa pessoaEntity = converterPessoaCreateParaPessoa(pessoa);
-        return converterPessoaParaPessoaDTO(pessoaRepository.create(pessoaEntity));
+        pessoaEntity = pessoaRepository.create(pessoaEntity);
+        PessoaDTO pessoaDTO = converterPessoaParaPessoaDTO(pessoaEntity);
+        emailService.sendCreatePessoa(pessoaDTO);
+        return pessoaDTO;
     }
 
     public PessoaDTO update(Integer id, PessoaCreateDTO pessoaAtualizar) throws Exception {
@@ -69,12 +75,15 @@ public class PessoaService {
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
-        return converterPessoaParaPessoaDTO(pessoaRecuperada);
+        PessoaDTO pessoaDTO = converterPessoaParaPessoaDTO(pessoaRecuperada);
+        emailService.sendAlterarPessoa(pessoaDTO);
+        return pessoaDTO;
     }
 
     public void delete(Integer id) throws Exception {
         Pessoa pessoaRecuperada = buscarUsuarioPorId(id);
         PessoaRepository.getListaPessoas().remove(pessoaRecuperada);
+        emailService.sendExluirPessoa(converterPessoaParaPessoaDTO(pessoaRecuperada));
     }
 
 }

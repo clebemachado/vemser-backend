@@ -4,6 +4,7 @@ import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
 import br.com.vermser.pessoapi.entity.PropertieReader;
 import br.com.vermser.pessoapi.service.PessoaService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -43,8 +44,8 @@ public class PessoaController {
     }
 
     @PostMapping
-    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoaDTO){
-        return ResponseEntity.ok(pessoaService.create(pessoaDTO));
+    public ResponseEntity<PessoaDTO> create(@Valid @RequestBody PessoaCreateDTO pessoaCDTO){
+        return ResponseEntity.ok(pessoaService.create(pessoaCDTO));
     }
 
     @PutMapping("/{idPessoa}")

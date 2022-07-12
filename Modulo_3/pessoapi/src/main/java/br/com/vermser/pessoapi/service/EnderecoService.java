@@ -3,6 +3,7 @@ package br.com.vermser.pessoapi.service;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoCreateDTO;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
 import br.com.vermser.pessoapi.entity.Endereco;
+import br.com.vermser.pessoapi.entity.Pessoa;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -22,6 +23,9 @@ public class EnderecoService {
 
     @Autowired
     PessoaService pessoaService;
+
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     ObjectMapper objectMapper;
@@ -64,14 +68,18 @@ public class EnderecoService {
 
     public EnderecoDTO createEndereco(Integer idPessoa, EnderecoCreateDTO enderecoCDTO)
             throws Exception {
-        pessoaService.buscarUsuarioPorId(idPessoa);
+        Pessoa pessoa = pessoaService.buscarUsuarioPorId(idPessoa);
         Endereco endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
         endereco.setIdPessoa(idPessoa);
-        return convertEnderecoParaEnderecoDTO(enderecoRepository.createEndereco(endereco));
+        EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.createEndereco(endereco));
+        emailService.sendCreateEndereco(pessoa, enderecoDTO);
+        return enderecoDTO;
     }
 
     public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws Exception{
         Endereco enderecoRecuperado = getEnderecoPorID(idEndereco);
+        String nomeEnderecoAntigo = enderecoRecuperado.getLogradouro();
+
         enderecoRecuperado.setCep(enderecoCreateDTO.getCep());
         enderecoRecuperado.setCidade(enderecoCreateDTO.getCidade());
         enderecoRecuperado.setComplemento(enderecoCreateDTO.getComplemento());
@@ -81,11 +89,23 @@ public class EnderecoService {
         enderecoRecuperado.setEstado(enderecoCreateDTO.getEstado());
         enderecoRecuperado.setPais(enderecoCreateDTO.getPais());
         enderecoRecuperado.setTipo(enderecoCreateDTO.getTipo());
+
+
+        emailService.sendAlterarEndereco(
+                pessoaService.getPessoaPorId(enderecoRecuperado.getIdPessoa()),
+                enderecoCreateDTO,
+                nomeEnderecoAntigo
+                );
         return convertEnderecoParaEnderecoDTO(enderecoRecuperado);
     }
 
     public void delete(Integer idEndereco) throws Exception {
-        enderecoRepository.getEnderecoList().remove(getEnderecoPorID(idEndereco));
+        Endereco endereco = getEnderecoPorID(idEndereco);
+        enderecoRepository.getEnderecoList().remove(endereco);
+        emailService.sendExluirEndereco(
+                pessoaService.getPessoaPorId(endereco.getIdPessoa()),
+                endereco
+        );
     }
 
 }
