@@ -72,7 +72,7 @@ public class EnderecoService {
         Endereco endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
         endereco.setIdPessoa(idPessoa);
         EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.createEndereco(endereco));
-        emailService.sendCreateEndereco(pessoa, enderecoDTO);
+        emailService.sendCreateEndereco(pessoaService.converterPessoaParaPessoaDTO(pessoa), enderecoDTO);
         return enderecoDTO;
     }
 

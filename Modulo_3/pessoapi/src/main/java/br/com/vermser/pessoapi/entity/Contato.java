@@ -1,6 +1,7 @@
 package br.com.vermser.pessoapi.entity;
 
 import br.com.vermser.pessoapi.enums.TipoContato;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;

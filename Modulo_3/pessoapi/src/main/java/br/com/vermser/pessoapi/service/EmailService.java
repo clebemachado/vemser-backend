@@ -36,26 +36,32 @@ public class EmailService {
 
     private final JavaMailSender emailSend;
 
-    private void enviarEmailEndereco(String subject, String text, String email) {
-        SimpleMailMessage message = new SimpleMailMessage();
-
-        message.setFrom(from);
-        message.setTo(email);
-        message.setSubject(subject);
-        message.setText(text);
-        emailSend.send(message);
+    private Map<String, Object> getDados(PessoaDTO pessoaDTO, String body){
+        Map<String, Object> dados = new HashMap<>();
+        dados.put("nome", pessoaDTO.getNome());
+        dados.put("body", body);
+        dados.put("email", from);
+        dados.put("emailUser", pessoaDTO.getEmail());
+        return dados;
     }
 
-    private void enviarEmailPessoa(PessoaDTO pessoaDTO, String subject, String template){
+    public String getTemplate(Map<String, Object> dados)
+            throws IOException, TemplateException {
+        Template template = fmConfiguration.getTemplate("email-template.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
+        return html;
+    }
+
+    private void enviarEmail(Map<String, Object> dados, String subject){
         MimeMessage mimeMessage = emailSend.createMimeMessage();
         try {
 
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
 
             mimeMessageHelper.setFrom(new InternetAddress(from, " Informativo - DBC"));
-            mimeMessageHelper.setTo(pessoaDTO.getEmail());
+            mimeMessageHelper.setTo(dados.get("emailUser").toString());
             mimeMessageHelper.setSubject(subject);
-            mimeMessageHelper.setText(getTemplate(pessoaDTO, template), true);
+            mimeMessageHelper.setText(getTemplate(dados), true);
 
             emailSend.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException | IOException | TemplateException e) {
@@ -63,57 +69,42 @@ public class EmailService {
         }
     }
 
-    public String getTemplate(PessoaDTO pessoaDTO, String nomeTemplate)
-            throws IOException, TemplateException {
-        Map<String, Object> dados = new HashMap<>();
-        dados.put("nome", pessoaDTO.getNome());
-        dados.put("id", pessoaDTO.getIdPessoa());
-        dados.put("email", from);
-
-        Template template = fmConfiguration.getTemplate(nomeTemplate);
-        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, dados);
-        return html;
-    }
-
     public void sendCreatePessoa(PessoaDTO pessoaDTO) {
-        enviarEmailPessoa(pessoaDTO, "Criação de conta.", "email-template-create.ftl");
+        String body = "Seu cadastro foi realizado com sucesso, seu identificador sera "
+                + pessoaDTO.getIdPessoa();
+        enviarEmail(getDados(pessoaDTO, body), "Criação de conta.");
     }
 
     public void sendAlterarPessoa(PessoaDTO pessoaDTO) {
-        enviarEmailPessoa(pessoaDTO, "Alteração cadastral.", "email-template-alter.ftl" );
+        String body = "Seus dados foram alterados no nosso sistema.";
+        enviarEmail(getDados(pessoaDTO, body), "Alteração cadastral." );
     }
 
     public void sendExluirPessoa(PessoaDTO pessoaDTO) {
-        enviarEmailPessoa(pessoaDTO, "Exclusão de conta.", "email-template-exclude.ftl");
+        String body = "Você perdeu o acesso ao nosso sistema";
+        enviarEmail(getDados(pessoaDTO, body), "Exclusão de conta.");
     }
 
-    public void sendCreateEndereco(Pessoa pessoa, EnderecoDTO endereco) {
-        String body = "Olá " + pessoa.getNome() + "\n\n"
-                + "Seu endereço " + endereco.getLogradouro() + " foi criado. \n\n"
-                + "Qualquer dúvida é só contatar com o suporte pelo e-mail " + from;
-        enviarEmailEndereco("Endereço criado", body, pessoa.getEmail());
+    public void sendCreateEndereco(PessoaDTO pessoaDTO, EnderecoDTO endereco) {
+        String body = "Seu endereço " + endereco.getLogradouro() + " foi criado.";
+        enviarEmail(getDados(pessoaDTO, body), "Endereco criado." );
     }
 
     public void sendAlterarEndereco(PessoaDTO pessoa, EnderecoCreateDTO endereco, String enderecoAntigo) {
 
         if(!enderecoAntigo.equals(endereco.getLogradouro())){
-            enderecoAntigo += " foi atualizado para " + endereco.getLogradouro();
+            enderecoAntigo = "Seu endereço " + enderecoAntigo + " foi atualizado para "
+                    + endereco.getLogradouro()
+                    +" em nossos sistema.";
         } else {
-            enderecoAntigo += " foi atualizado para ";
+            enderecoAntigo += "Seu endereço foi atualizado para foi atualizado em nossos sistema.";
         }
-
-        String body = "Olá " + pessoa.getNome() + "\n\n"
-                + "Seu endereço "+ enderecoAntigo +" em nossos sistema. \n\n"
-                + "Qualquer dúvida é só contatar com o suporte pelo e-mail " + from;
-
-        enviarEmailEndereco("Endereço alterado", body, pessoa.getEmail());
+        enviarEmail(getDados(pessoa, enderecoAntigo), "Atualização de endereço.");
     }
 
     public void sendExluirEndereco(PessoaDTO pessoa, Endereco endereco) {
-        String body = "Olá " + pessoa.getNome() + "\n\n"
-                + "Seu endereço "+ endereco.getLogradouro() +" removido do nossos sistema. \n\n"
-                + "Qualquer dúvida é só contatar com o suporte pelo e-mail " + from;
-        enviarEmailEndereco("Endereço excluido", body, pessoa.getEmail());
+        String body = "Seu endereço "+ endereco.getLogradouro() +" removido do nossos sistema.";
+        enviarEmail(getDados(pessoa, body), "Exclusão de endereço.");
     }
 
 }

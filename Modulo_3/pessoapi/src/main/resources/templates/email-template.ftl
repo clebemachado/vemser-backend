@@ -19,14 +19,14 @@
                         </div>
 
                         <div style="font-size: 24px; color: #555100;">
-                            <br> Seus dados foram alterados no nosso sistema.</b> <br>
+                            <br>${body}</b> <br>
                         </div>
                         <div>
                             <br>"Qualquer dúvida é só contar contatar com o suporte pelo e-mail ${email}" <br> <br>
                             <br>
                         </div>
                         <div>
-                            <br>"Att, Sistema. " <br>
+                            <br>"Att, Sistema." <br>
                         </div>
                     </td>
                 </tr>
