@@ -19,14 +19,10 @@ public class Contato {
     private Integer idContato;
     private Integer idPessoa;
 
-    @NotEmpty(message = "O número não pode ser vazio.")
-    @Size( max = 13, message = "O maximo é 13 para o número.")
     private String numero;
 
-    @NotEmpty(message = "Descrição não pode ser vazio.")
     private String descricao;
 
-    @NotNull(message = "Tipo de contato inválido.")
     private TipoContato tipoContato;
 
 }

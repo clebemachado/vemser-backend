@@ -17,31 +17,20 @@ public class Endereco {
     private Integer idEndereco;
     private Integer idPessoa;
 
-    @NotNull
     private TipoEndereco tipo;
 
-    @NotEmpty
-    @Size(max = 250)
     private String logradouro;
 
-    @NotNull
-    @Min(1)
     private Integer numero;
 
     private String complemento;
 
-    @NotEmpty
-    @Size(max = 8, min = 8)
     private String cep;
 
-    @NotEmpty
-    @Size(max = 250)
     private String cidade;
 
-    @NotNull
     private String estado;
 
-    @NotNull
     private String pais;
 
 }
