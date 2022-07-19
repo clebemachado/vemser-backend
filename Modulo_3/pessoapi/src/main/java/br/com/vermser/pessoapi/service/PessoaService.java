@@ -2,7 +2,7 @@ package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
-import br.com.vermser.pessoapi.entity.Pessoa;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Pessoa;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -66,7 +66,7 @@ public class PessoaService {
         Pessoa pessoaEntity = converterPessoaCreateParaPessoa(pessoa);
         pessoaEntity = pessoaRepository.create(pessoaEntity);
         PessoaDTO pessoaDTO = converterPessoaParaPessoaDTO(pessoaEntity);
-        emailService.sendCreatePessoa(pessoaDTO);
+        //emailService.sendCreatePessoa(pessoaDTO);
         return pessoaDTO;
     }
 

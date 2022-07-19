@@ -1,4 +1,4 @@
-package br.com.vermser.pessoapi.entity;
+package br.com.vermser.pessoapi.dto.dadosPessoais.entity;
 
 import lombok.*;
 

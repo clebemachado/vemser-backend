@@ -1,4 +1,4 @@
-package br.com.vermser.pessoapi.entity;
+package br.com.vermser.pessoapi.dto.dadosPessoais.entity;
 
 import br.com.vermser.pessoapi.enums.TipoContato;
 import io.swagger.v3.oas.annotations.media.Schema;

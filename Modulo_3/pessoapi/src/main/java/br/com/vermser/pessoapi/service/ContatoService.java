@@ -2,7 +2,7 @@ package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
 import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
-import br.com.vermser.pessoapi.entity.Contato;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Contato;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.ContatoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -42,7 +42,7 @@ public class ContatoService {
                         + idContato + " não existe."));
     }
 
-    public List<ContatoDTO> listarContatos() {
+    public List<ContatoDTO> list() {
         return contatoRepository.listarContatos()
                 .stream()
                 .map(this::converterContatoParaContatoDTO)

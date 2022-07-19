@@ -1,6 +1,6 @@
 package br.com.vermser.pessoapi.repository;
 
-import br.com.vermser.pessoapi.entity.Pessoa;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Pessoa;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;

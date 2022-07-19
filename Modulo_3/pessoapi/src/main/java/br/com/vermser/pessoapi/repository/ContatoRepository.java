@@ -1,6 +1,6 @@
 package br.com.vermser.pessoapi.repository;
 
-import br.com.vermser.pessoapi.entity.Contato;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Contato;
 import br.com.vermser.pessoapi.enums.TipoContato;
 import org.springframework.stereotype.Repository;
 

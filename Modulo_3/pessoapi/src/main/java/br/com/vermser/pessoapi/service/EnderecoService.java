@@ -2,8 +2,8 @@ package br.com.vermser.pessoapi.service;
 
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoCreateDTO;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
-import br.com.vermser.pessoapi.entity.Endereco;
-import br.com.vermser.pessoapi.entity.Pessoa;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Endereco;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Pessoa;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
 import br.com.vermser.pessoapi.repository.EnderecoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Data
 public class PessoaCreateDTO {
 
-    @Schema(description = "Exemplo nome: Cleber.")
+    @Schema(description = "Nome da pessoa.", example = "Cleber")
     @NotEmpty(message = "Deve ser informado um nome.")
     private String nome;
 

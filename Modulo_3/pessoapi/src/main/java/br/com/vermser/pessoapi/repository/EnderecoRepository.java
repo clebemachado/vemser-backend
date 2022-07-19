@@ -1,6 +1,6 @@
 package br.com.vermser.pessoapi.repository;
 
-import br.com.vermser.pessoapi.entity.Endereco;
+import br.com.vermser.pessoapi.dto.dadosPessoais.entity.Endereco;
 import br.com.vermser.pessoapi.enums.TipoEndereco;
 import org.springframework.stereotype.Repository;
 
