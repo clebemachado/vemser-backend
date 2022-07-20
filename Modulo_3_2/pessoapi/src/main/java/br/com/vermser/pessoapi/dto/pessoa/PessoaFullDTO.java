@@ -1,19 +1,22 @@
 package br.com.vermser.pessoapi.dto.pessoa;
 
+import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
+import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
+import br.com.vermser.pessoapi.dto.pet.PetDTO;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Set;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaCreateDTO {
-
-    @Schema(required = false, hidden = true)
-    private Integer idPessoa;
+public class PessoaFullDTO {
 
     @Schema(example = "Cleber", required = true)
     @NotEmpty(message = "Deve ser informado um nome.")
@@ -32,4 +35,14 @@ public class PessoaCreateDTO {
     @Email
     @NotNull
     private String email;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private PetDTO pet;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Set<ContatoDTO> contatos;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Set<EnderecoDTO> enderecos;
+
 }

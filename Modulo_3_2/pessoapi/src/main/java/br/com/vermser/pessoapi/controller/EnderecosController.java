@@ -3,7 +3,6 @@ package br.com.vermser.pessoapi.controller;
 import br.com.vermser.pessoapi.documentation.DocumentationEnderecoController;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoCreateDTO;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
-import br.com.vermser.pessoapi.entity.EnderecoEntity;
 import br.com.vermser.pessoapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -38,7 +37,6 @@ public class EnderecosController implements DocumentationEnderecoController {
     @PostMapping("/{idPessoa}")
     public EnderecoDTO createEndereco(@PathVariable Integer idPessoa,
                                    @Valid @RequestBody EnderecoCreateDTO endereco) throws Exception {
-        System.out.println("CREATE");
         return enderecoService.createEndereco(idPessoa, endereco);
     }
 

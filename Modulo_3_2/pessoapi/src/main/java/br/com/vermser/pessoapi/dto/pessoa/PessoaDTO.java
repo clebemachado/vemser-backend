@@ -1,12 +1,13 @@
 package br.com.vermser.pessoapi.dto.pessoa;
 
-import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.*;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class PessoaDTO extends PessoaCreateDTO{
+@AllArgsConstructor
+@NoArgsConstructor
+public class PessoaDTO extends PessoaFullDTO {
 
-    @Schema(description = "Id para identificação da pessoa.")
     private Integer idPessoa;
 
 }

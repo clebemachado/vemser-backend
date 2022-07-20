@@ -1,5 +1,6 @@
 package br.com.vermser.pessoapi.exceptions;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,37 +29,47 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", status.value());
-
         //Get all errors
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(x -> x.getField() + ": " + x.getDefaultMessage())
                 .collect(Collectors.toList());
-
         body.put("errors", errors);
-
         return new ResponseEntity<>(body, headers, status);
     }
 
     @ExceptionHandler(RegraDeNegocioException.class)
     public ResponseEntity<Object> handleException(RegraDeNegocioException exception,
                                                   HttpServletRequest request) {
+        return getObjectResponseEntity(exception.getMessage());
+    }
+
+    @NotNull
+    private ResponseEntity<Object> getObjectResponseEntity(String exception) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("message", exception.getMessage());
+        body.put("message", exception);
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Object> handleException(ConstraintViolationException exception,
                                                   HttpServletRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", new Date());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("message", exception.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+        return getObjectResponseEntity(exception.getMessage());
+    }
+
+    @ExceptionHandler(PessoaException.class)
+    public ResponseEntity<Object> handleException(PessoaException exception,
+                                                  HttpServletRequest request) {
+        return getObjectResponseEntity(exception.getMessage());
+    }
+
+    @ExceptionHandler(ContatoException.class)
+    public ResponseEntity<Object> handleException(ContatoException exception,
+                                                  HttpServletRequest request) {
+        return getObjectResponseEntity(exception.getMessage());
     }
 
 }

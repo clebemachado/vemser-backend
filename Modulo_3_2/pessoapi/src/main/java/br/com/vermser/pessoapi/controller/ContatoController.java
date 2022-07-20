@@ -1,18 +1,14 @@
 package br.com.vermser.pessoapi.controller;
 
-import br.com.vermser.pessoapi.anotations.MagiaResponse;
 import br.com.vermser.pessoapi.documentation.DocumentationContatoController;
 import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
 import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
 import br.com.vermser.pessoapi.service.ContatoService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -21,33 +17,39 @@ import java.util.List;
 public class ContatoController implements DocumentationContatoController {
 
     @Autowired
-    ContatoService contatoService;
+    private ContatoService contatoService;
 
+    @Override
+    @GetMapping("/{idContato}")
+    public ResponseEntity<ContatoDTO> findById(Integer idContato) throws Exception {
+        return ResponseEntity.ok(contatoService.findById(idContato));
+    }
+
+    @Override
     @GetMapping
-    public List<ContatoDTO> list(){
-        return contatoService.list();
+    public ResponseEntity<List<ContatoDTO>> list() {
+        return ResponseEntity.ok(
+                contatoService.list()
+        );
     }
 
-    @GetMapping("/{idUser}")
-    public List<ContatoDTO> listById(@PathVariable Integer idUser) {
-        return contatoService.listById(idUser);
-    }
-
+    @Override
     @PostMapping("/{idPessoa}")
-    public ContatoDTO create(@PathVariable Integer idPessoa,
-                             @Valid @RequestBody ContatoCreateDTO contato) throws Exception {
+    public ContatoDTO create(Integer idPessoa, ContatoCreateDTO contato) throws Exception {
+        System.out.println("AQUI");
         return contatoService.create(idPessoa, contato);
     }
 
+    @Override
     @PutMapping("/{idContato}")
-    public ContatoDTO updateContato(@PathVariable Integer idContato,
-                                    @Valid @RequestBody ContatoCreateDTO novoContato) throws Exception {
-        return contatoService.updateContato(idContato, novoContato);
+    public ResponseEntity<ContatoDTO> updateContato(Integer idContato, ContatoCreateDTO novoContato)
+            throws Exception {
+        return ResponseEntity.ok(contatoService.updateContato(idContato, novoContato));
     }
 
+    @Override
     @DeleteMapping("/{idContato}")
-    public void delete(@PathVariable Integer idContato) throws Exception {
+    public void delete(Integer idContato) throws Exception {
         contatoService.delete(idContato);
     }
-
 }

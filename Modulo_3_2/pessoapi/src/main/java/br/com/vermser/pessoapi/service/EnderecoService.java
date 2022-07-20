@@ -65,11 +65,12 @@ public class EnderecoService {
 
     public EnderecoDTO createEndereco(Integer idPessoa, EnderecoCreateDTO enderecoCDTO)
             throws Exception {
-        PessoaEntity pessoa = pessoaService.buscarUsuarioPorId(idPessoa);
-        EnderecoEntity endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
-        EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.save(endereco));
+        //PessoaEntity pessoa = pessoaService.findById(idPessoa);
+        //EnderecoEntity endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
+        //EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.save(endereco));
         //emailService.sendCreateEndereco(pessoaService.converterPessoaParaPessoaDTO(pessoa), enderecoDTO);
-        return enderecoDTO;
+        //return enderecoDTO;
+        return null;
     }
 
     public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws Exception{

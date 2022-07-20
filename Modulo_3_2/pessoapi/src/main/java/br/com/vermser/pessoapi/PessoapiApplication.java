@@ -10,21 +10,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 
 @SpringBootApplication
 @EnableFeignClients
-public class PessoapiApplication implements CommandLineRunner {
+public class PessoapiApplication  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PessoapiApplication.class, args);
 	}
 
-	@Override
-	public void run(String... args) throws Exception {
-		for(TipoEndereco tipoEnd: TipoEndereco.values()){
-			System.out.println(tipoEnd + ": " + tipoEnd.ordinal() + " ");
-		}
-		System.out.println();
-		for (TipoEndereco tipoEnd : TipoEndereco.values()) {
-			System.out.println("Nome: " + tipoEnd  + " : " + tipoEnd.getTipo() );
-			System.out.println(TipoEndereco.ofTipo(tipoEnd.getTipo()));
-		}
-	}
 }
