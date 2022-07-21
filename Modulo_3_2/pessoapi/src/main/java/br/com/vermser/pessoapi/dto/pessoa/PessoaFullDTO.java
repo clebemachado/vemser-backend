@@ -36,13 +36,13 @@ public class PessoaFullDTO {
     @NotNull
     private String email;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    //@JsonInclude(JsonInclude.Include.NON_NULL)
     private PetDTO pet;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    //@JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<ContatoDTO> contatos;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    //
     private Set<EnderecoDTO> enderecos;
 
 }

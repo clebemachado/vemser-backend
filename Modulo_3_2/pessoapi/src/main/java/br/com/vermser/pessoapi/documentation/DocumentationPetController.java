@@ -24,7 +24,8 @@ public interface DocumentationPetController {
 
     @Operation(summary = "Cria um pet.")
     public ResponseEntity<PetDTO> create(@PathVariable Integer idPessoa,
-                                            @Valid @RequestBody PetCreateDTO petCreateDTO) throws PessoaException;
+                                         @Valid @RequestBody PetCreateDTO petCreateDTO)
+            throws PessoaException;
 
     @Operation(summary = "Atualiza um pet")
     public ResponseEntity<PetDTO> update(Integer idPet,

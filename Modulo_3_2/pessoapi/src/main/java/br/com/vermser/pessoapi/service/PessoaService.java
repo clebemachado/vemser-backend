@@ -6,6 +6,8 @@ import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaFullDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
 import br.com.vermser.pessoapi.dto.pet.PetDTO;
+import br.com.vermser.pessoapi.dto.relatorio.PessoaRelatorioDTO;
+import br.com.vermser.pessoapi.dto.relatorio.PessoaRelatorioFull;
 import br.com.vermser.pessoapi.entity.ContatoEntity;
 import br.com.vermser.pessoapi.entity.EnderecoEntity;
 import br.com.vermser.pessoapi.entity.PessoaEntity;
@@ -15,8 +17,11 @@ import br.com.vermser.pessoapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -141,6 +146,7 @@ public class PessoaService {
     public List<PessoaDTO> listPessoaWithPet(Integer idPessoa){
         Stream<PessoaEntity> pessoaEntityStream =
                 idPessoa == null ? streamListPessoas() : streamOnePessoa(idPessoa);
+
         return pessoaEntityStream.map(p -> {
             PessoaDTO pessoaDTO = toPessoaDTO(p);
             if(p.getPet() != null){
@@ -178,17 +184,50 @@ public class PessoaService {
                         {
                             PessoaDTO pessoaDTO = toPessoaDTO(p);
                             Set<EnderecoEntity> enderecosSet = p.getEnderecos();
-                            if( enderecosSet!= null){
-                                Set<EnderecoDTO> enderecos =
-                                        enderecosSet.stream()
-                                                .map(this::toEnderecoDTO)
-                                                .collect(Collectors.toSet());
-
-                                pessoaDTO.setEnderecos(enderecos);
-                            }
+                            Set<EnderecoDTO> enderecos =
+                                    enderecosSet.stream()
+                                            .map(this::toEnderecoDTO)
+                                            .collect(Collectors.toSet());
+                            pessoaDTO.setEnderecos(enderecos);
                             return pessoaDTO;
                         }
                 ).collect(Collectors.toList());
+    }
+
+    public List<PessoaDTO> getCompleto(Integer idPessoa) throws PessoaException {
+        try {
+            if(idPessoa == null) {
+                return pessoaRepository.getPessoaDados()
+                        .stream()
+                        .map(this::streamMap)
+                        .collect(Collectors.toList());
+            } else {
+                return pessoaRepository.getPessoaDados(idPessoa)
+                        .stream()
+                        .map(this::streamMap)
+                        .collect(Collectors.toList());
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new PessoaException("Error ao buscar pessoa");
+        }
+    }
+
+    public List<PessoaRelatorioDTO> getRelatorio(Integer idPessoa){
+        return pessoaRepository.getRelatorio(idPessoa);
+    }
+
+    private PessoaDTO streamMap(PessoaEntity p) {
+        PessoaDTO pessoaDTO = toPessoaDTO(p);
+        pessoaDTO.setContatos(p.getContatos()
+                .stream()
+                .map(this::toContatoDTO).collect(Collectors.toSet()));
+        pessoaDTO.setPet(toPetDTO(p.getPet()));
+        pessoaDTO.setEnderecos(p.getEnderecos()
+                .stream().map(this::toEnderecoDTO)
+                .collect(Collectors.toSet())
+        );
+        return pessoaDTO;
     }
 
 

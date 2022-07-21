@@ -1,14 +1,12 @@
 package br.com.vermser.pessoapi.service;
 
-import br.com.vermser.pessoapi.dto.contato.ContatoCreateDTO;
-import br.com.vermser.pessoapi.dto.contato.ContatoDTO;
 import br.com.vermser.pessoapi.dto.pet.PetCreateDTO;
 import br.com.vermser.pessoapi.dto.pet.PetDTO;
-import br.com.vermser.pessoapi.entity.ContatoEntity;
 import br.com.vermser.pessoapi.entity.PessoaEntity;
 import br.com.vermser.pessoapi.entity.PetEntity;
 import br.com.vermser.pessoapi.exceptions.PessoaException;
 import br.com.vermser.pessoapi.exceptions.RegraDeNegocioException;
+import br.com.vermser.pessoapi.repository.PessoaRepository;
 import br.com.vermser.pessoapi.repository.PetRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +20,9 @@ public class PetService {
 
     @Autowired
     private PetRepository petRepository;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
 
     @Autowired
     private PessoaService pessoaService;
@@ -54,9 +55,12 @@ public class PetService {
     }
 
     public PetDTO create(Integer idPessoa, PetCreateDTO petCreateDTO) throws PessoaException {
+        PessoaEntity pessoaEntity = pessoaService.getPessoaById(idPessoa);
         PetEntity petEntity = toPetEntity(petCreateDTO);
-        petEntity.setPessoa(pessoaService.getPessoaById(idPessoa));
-        petRepository.save(petEntity);
+        petEntity.setPessoa(pessoaEntity);
+        petEntity = petRepository.save(petEntity);
+        pessoaEntity.setPet(petEntity);
+        pessoaRepository.save(pessoaEntity);
         return toPetDto(petEntity);
     }
 
@@ -66,6 +70,11 @@ public class PetService {
         petEntity.setNome(petCreateDTO.getNome());
         petEntity.setTipo(petCreateDTO.getTipo());
         petRepository.save(petEntity);
+
+        PessoaEntity pessoa = petEntity.getPessoa();
+        pessoa.setPet(petEntity);
+        pessoaRepository.save(pessoa);
+
         return toPetDto(petEntity);
     }
 

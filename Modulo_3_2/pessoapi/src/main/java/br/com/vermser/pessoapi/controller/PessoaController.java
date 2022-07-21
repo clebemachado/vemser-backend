@@ -2,9 +2,13 @@ package br.com.vermser.pessoapi.controller;
 
 import br.com.vermser.pessoapi.documentation.DocumentationPeopleController;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
-import br.com.vermser.pessoapi.dto.pessoa.PessoaFullDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
+import br.com.vermser.pessoapi.dto.relatorio.PessoaRelatorioDTO;
+import br.com.vermser.pessoapi.entity.EnderecoEntity;
+import br.com.vermser.pessoapi.entity.PessoaEntity;
+import br.com.vermser.pessoapi.enums.TipoContato;
 import br.com.vermser.pessoapi.exceptions.PessoaException;
+import br.com.vermser.pessoapi.repository.PessoaRepository;
 import br.com.vermser.pessoapi.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,24 @@ public class PessoaController implements DocumentationPeopleController {
 
     @Autowired
     private PessoaService pessoaService;
+
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @GetMapping("/pessoa-cpf")
+    public PessoaEntity getPessoaByCPF(String cpf){
+        return pessoaRepository.getPessoaCPF(cpf);
+    }
+
+    @GetMapping("/endereco-pessoa")
+    public EnderecoEntity getPessoaEndereco(Integer id){
+        return pessoaRepository.findByEndereco(id);
+    }
+
+    @GetMapping("/contato-por-tipo")
+     public List<PessoaEntity> getContato(TipoContato tipoContato){
+        return pessoaRepository.findByContatos_tipoContato(tipoContato);
+    }
 
     @GetMapping("/{idPessoa}")
     public PessoaDTO findById(@PathVariable Integer idPessoa) throws PessoaException {
@@ -60,20 +82,31 @@ public class PessoaController implements DocumentationPeopleController {
     }
 
     @GetMapping("/listar-com-contatos")
-    public ResponseEntity<List<PessoaDTO>> findWithContact(Integer idPessoa)
+    public ResponseEntity<List<PessoaDTO>> findWithContact(@RequestParam(required = false)Integer idPessoa)
             throws PessoaException {
         return ResponseEntity.ok(pessoaService.findByIdWithContact(idPessoa));
     }
 
     @Override
     @GetMapping("/listar-com-enderecos")
-    public ResponseEntity<List<PessoaDTO>> findWithEnderecos(Integer idPessoa) throws PessoaException {
+    public ResponseEntity<List<PessoaDTO>> findWithEnderecos(@RequestParam(required = false)Integer idPessoa) throws PessoaException {
         return ResponseEntity.ok(pessoaService.findByIdWithAddress(idPessoa));
     }
 
     @GetMapping("/listar-com-pets")
-    public ResponseEntity<List<PessoaDTO>> findWithPet(Integer idPessoa)  {
+    public ResponseEntity<List<PessoaDTO>> findWithPet(@RequestParam(required = false)Integer idPessoa)  {
         return ResponseEntity.ok(pessoaService.listPessoaWithPet(idPessoa));
     }
+
+    @GetMapping("/pessoa-completo")
+    public ResponseEntity<List<PessoaDTO>> getCompleto(@RequestParam(required = false) Integer idPessoa) throws PessoaException {
+        return ResponseEntity.ok(pessoaService.getCompleto(idPessoa));
+    };
+
+    @GetMapping("/relatorio")
+    public ResponseEntity<List<PessoaRelatorioDTO>> getRelatorio(
+            @RequestParam(required = false) Integer idPessoa) throws PessoaException {
+        return ResponseEntity.ok(pessoaService.getRelatorio(idPessoa));
+    };
 
 }

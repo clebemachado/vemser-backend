@@ -3,8 +3,10 @@ package br.com.vermser.pessoapi.controller;
 import br.com.vermser.pessoapi.documentation.DocumentationEnderecoController;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoCreateDTO;
 import br.com.vermser.pessoapi.dto.enderecos.EnderecoDTO;
+import br.com.vermser.pessoapi.entity.EnderecoEntity;
 import br.com.vermser.pessoapi.service.EnderecoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,10 +31,12 @@ public class EnderecosController implements DocumentationEnderecoController {
         return enderecoService.pegarEnderecoPorID(idEndereco);
     }
 
-//    @GetMapping("/{idPessoa}/pessoa")
-//    public List<EnderecoEntity> pegarEnderecoPorPessoa(@PathVariable Integer idPessoa) throws Exception {
-//        return enderecoService.pegarEnderecoPorPessoa(idPessoa);
-//    }
+    @Override
+    @GetMapping("/pessoa/{idPessoa}")
+    public ResponseEntity<List<EnderecoDTO>> pegarEnderecoPorPessoa(Integer idPessoa)
+            throws Exception {
+        return ResponseEntity.ok(enderecoService.pegarEnderecoPorPessoa(idPessoa));
+    }
 
     @PostMapping("/{idPessoa}")
     public EnderecoDTO createEndereco(@PathVariable Integer idPessoa,

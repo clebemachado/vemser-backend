@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Validated
@@ -35,14 +36,17 @@ public class PetController implements DocumentationPetController {
 
     @Override
     @PostMapping("/{idPessoa}")
-    public ResponseEntity<PetDTO> create(Integer idPessoa, PetCreateDTO petCreateDTO)
+    public ResponseEntity<PetDTO> create(@PathVariable Integer idPessoa,
+                                         @Valid @RequestBody PetCreateDTO petCreateDTO)
             throws PessoaException {
         return ResponseEntity.ok(petService.create(idPessoa, petCreateDTO));
     }
 
     @Override
     @PutMapping("/{idPet}")
-    public ResponseEntity<PetDTO> update(Integer idPet, PetCreateDTO petCreateDTO) throws Exception {
+    public ResponseEntity<PetDTO> update(@PathVariable Integer idPet,
+                                         @Valid @RequestBody PetCreateDTO petCreateDTO)
+            throws Exception {
         return ResponseEntity.ok(petService.update(idPet, petCreateDTO));
     }
 

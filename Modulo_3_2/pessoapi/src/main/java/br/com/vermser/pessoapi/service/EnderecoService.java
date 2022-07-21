@@ -11,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,22 +57,23 @@ public class EnderecoService {
         return convertEnderecoParaEnderecoDTO(getEnderecoPorID(idEndereco));
     }
 
-//    public List<EnderecoDTO> pegarEnderecoPorPessoa(Integer idPessoa) throws Exception {
-//        pessoaService.buscarUsuarioPorId(idPessoa);
-//        return  enderecoRepository.findAll()
-//                .stream().filter(e -> e.getIdPessoa().equals(idPessoa))
-//                .map(this::convertEnderecoParaEnderecoDTO)
-//                .collect(Collectors.toList());
-//    }
+    public List<EnderecoDTO> pegarEnderecoPorPessoa(Integer idPessoa) throws Exception {
+        PessoaEntity pessoaEntity = pessoaService.getPessoaById(idPessoa);
+        return enderecoRepository.findByPessoas_idPessoa(idPessoa)
+                .stream()
+                .map(this::convertEnderecoParaEnderecoDTO)
+                .collect(Collectors.toList());
+    }
 
     public EnderecoDTO createEndereco(Integer idPessoa, EnderecoCreateDTO enderecoCDTO)
             throws Exception {
-        //PessoaEntity pessoa = pessoaService.findById(idPessoa);
-        //EnderecoEntity endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
-        //EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.save(endereco));
-        //emailService.sendCreateEndereco(pessoaService.converterPessoaParaPessoaDTO(pessoa), enderecoDTO);
-        //return enderecoDTO;
-        return null;
+        PessoaEntity pessoa = pessoaService.getPessoaById(idPessoa);
+        EnderecoEntity endereco = convertEnderecoCreateDTOParaEndereco(enderecoCDTO);
+        endereco.setPessoas(new HashSet<>(Arrays.asList(pessoa)));
+        EnderecoDTO enderecoDTO = convertEnderecoParaEnderecoDTO(enderecoRepository.save(endereco));
+//        //emailService.sendCreateEndereco(pessoaService.converterPessoaParaPessoaDTO(pessoa), enderecoDTO);
+//        return enderecoDTO;
+        return enderecoDTO;
     }
 
     public EnderecoDTO update(Integer idEndereco, EnderecoCreateDTO enderecoCreateDTO) throws Exception{

@@ -1,5 +1,5 @@
 package br.com.vermser.pessoapi.enums;
 
 public enum TipoPet {
-    CACHORRO, GATO, PAPAGAIO;
+    CACHORRO, GATO, GUAXINIM;
 }

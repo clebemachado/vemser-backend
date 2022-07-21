@@ -4,6 +4,7 @@ import br.com.vermser.pessoapi.anotations.MagiaResponse;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaCreateDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaFullDTO;
 import br.com.vermser.pessoapi.dto.pessoa.PessoaDTO;
+import br.com.vermser.pessoapi.entity.PessoaEntity;
 import br.com.vermser.pessoapi.exceptions.PessoaException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
@@ -40,6 +41,9 @@ public interface DocumentationPeopleController {
 
     @Operation(summary = "Remover uma pessoa.")
     public void delete(Integer idUsuario) throws Exception;
+
+    @Operation(description = "Retorna uma pessoa completa")
+    public ResponseEntity<List<PessoaDTO>> getCompleto(Integer idPessoa) throws PessoaException;
 
 }
 

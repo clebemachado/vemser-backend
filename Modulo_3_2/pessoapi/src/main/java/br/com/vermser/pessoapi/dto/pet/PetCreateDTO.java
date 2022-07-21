@@ -21,7 +21,7 @@ public class PetCreateDTO {
     private String nome;
 
     @NotNull
-    @Schema(example = "Cachorro")
+    @Schema(example = "CACHORRO")
     private TipoPet tipo;
 
 
