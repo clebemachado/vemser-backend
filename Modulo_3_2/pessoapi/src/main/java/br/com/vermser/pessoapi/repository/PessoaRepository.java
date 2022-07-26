@@ -34,7 +34,6 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
     public List<PessoaEntity> getPessoaDados();
 
     @Query("SELECT new br.com.vermser.pessoapi.dto.relatorio.PessoaRelatorioDTO ( " +
-            " p.idPessoa," +
             " p.nome," +
             " p.email," +
             " c.numero," +

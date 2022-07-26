@@ -24,8 +24,8 @@ public class ContatoEntity implements Serializable {
     private String numero;
 
     private String descricao;
-    @Column(name = "TIPO")
 
+    @Column(name = "TIPO")
     private TipoContato tipoContato;
 
     @JsonIgnore

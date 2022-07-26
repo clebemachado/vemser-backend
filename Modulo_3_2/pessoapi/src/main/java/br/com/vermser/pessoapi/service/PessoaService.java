@@ -137,8 +137,6 @@ public class PessoaService {
                  .collect(Collectors.toList());
     }
 
-
-
     public PessoaDTO findByCpf(String cpf){
         return toPessoaDTO(pessoaRepository.findByCpf(cpf));
     }
@@ -208,7 +206,6 @@ public class PessoaService {
                         .collect(Collectors.toList());
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             throw new PessoaException("Error ao buscar pessoa");
         }
     }
@@ -229,6 +226,5 @@ public class PessoaService {
         );
         return pessoaDTO;
     }
-
 
 }

@@ -99,7 +99,8 @@ public class PessoaController implements DocumentationPeopleController {
     }
 
     @GetMapping("/pessoa-completo")
-    public ResponseEntity<List<PessoaDTO>> getCompleto(@RequestParam(required = false) Integer idPessoa) throws PessoaException {
+    public ResponseEntity<List<PessoaDTO>> getCompleto(@RequestParam(required = false) Integer idPessoa)
+            throws PessoaException {
         return ResponseEntity.ok(pessoaService.getCompleto(idPessoa));
     };
 

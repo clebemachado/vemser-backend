@@ -9,8 +9,6 @@ import java.util.List;
 @Getter
 @Setter
 public class PessoaRelatorioDTO {
-
-    private Integer id;
     private String nome;
     private String email;
     private String numero;
