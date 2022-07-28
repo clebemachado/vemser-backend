@@ -31,19 +31,10 @@ public class UsuarioService {
         return new BCryptPasswordEncoder().encode(password);
     }
 
-    public Optional<UsuarioEntity> findByLoginAndSenha(String login, String senha){
-        return usuarioRepository.findByLoginAndSenha(login, senha);
-    }
-
-    public Optional<UsuarioEntity> findByUsuarioWithId(Integer idUsuario){
-        return usuarioRepository.findById(idUsuario);
-    }
-
     public UsuarioDTO createUser(UsuarioCreateDTO usuarioCreate){
         UsuarioEntity usuario = convertToUsuarioEntity(usuarioCreate);
         usuario.setSenha(encodePassword(usuario.getSenha()));
         usuario = usuarioRepository.save(usuario);
-
         return convertToUsuarioDTO(usuario);
     }
 

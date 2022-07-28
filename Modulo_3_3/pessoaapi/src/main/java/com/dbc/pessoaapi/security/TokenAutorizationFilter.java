@@ -18,24 +18,19 @@ public class TokenAutorizationFilter extends OncePerRequestFilter {
 
     private final TokenService tokenService;
 
-    public static final String BEARER = "Bearer ";
-
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
-        String token = getTokenFromHeader(request);
+        String token = request.getHeader("Authorization");
 
-        UsernamePasswordAuthenticationToken userName = tokenService.isValid(token);
+        UsernamePasswordAuthenticationToken userName =
+                tokenService.isValid(token);
         SecurityContextHolder.getContext().setAuthentication(userName);
 
         filterChain.doFilter(request, response);
-    }
-
-    private String getTokenFromHeader(HttpServletRequest request){
-        return request.getHeader("Authorization");
     }
 
 }
