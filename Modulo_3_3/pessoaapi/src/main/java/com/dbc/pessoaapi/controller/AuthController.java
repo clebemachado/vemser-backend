@@ -1,11 +1,17 @@
 package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.LoginDTO;
+import com.dbc.pessoaapi.dto.UsuarioCreateDTO;
+import com.dbc.pessoaapi.dto.UsuarioDTO;
 import com.dbc.pessoaapi.entity.UsuarioEntity;
 import com.dbc.pessoaapi.exception.RegraDeNegocioException;
 import com.dbc.pessoaapi.security.TokenService;
 import com.dbc.pessoaapi.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,19 +28,29 @@ import java.util.Optional;
 public class AuthController {
 
     private final UsuarioService usuarioService;
+
     private final TokenService tokenService;
+
+    private final AuthenticationManager authenticationManager;
+
+    @PostMapping("/create-user")
+    public ResponseEntity<UsuarioDTO> createUser(@RequestBody UsuarioCreateDTO usuarioCreateDTO){
+        return ResponseEntity.ok(usuarioService.createUser(usuarioCreateDTO));
+    }
 
     @PostMapping
     public String auth(@RequestBody @Valid LoginDTO login) throws RegraDeNegocioException {
-        Optional<UsuarioEntity> usuario =
-                usuarioService.findByLoginAndSenha(login.getLogin(), login.getSenha());
 
-        if(usuario.isPresent()){
-            String token = tokenService.getToken(usuario.get());
-            return token;
-        } else {
-            throw new RegraDeNegocioException("Usuário ou senha inválidos.");
-        }
+        UsernamePasswordAuthenticationToken userPassAuthToken =
+                new UsernamePasswordAuthenticationToken(login.getLogin(), login.getSenha());
+
+        Authentication authentication =
+                authenticationManager.authenticate(userPassAuthToken);
+
+        Object usuarioLogado =  authentication.getPrincipal();
+        UsuarioEntity usuarioEntity = (UsuarioEntity) usuarioLogado;
+
+        return tokenService.getToken(usuarioEntity);
     }
 
 }

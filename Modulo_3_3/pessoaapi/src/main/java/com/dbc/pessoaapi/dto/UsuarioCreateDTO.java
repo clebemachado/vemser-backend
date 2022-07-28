@@ -1,13 +1,12 @@
 package com.dbc.pessoaapi.dto;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Data
-public class LoginDTO {
-
+public class UsuarioCreateDTO {
     @Schema(example = "user")
     @NotEmpty
     private String login;

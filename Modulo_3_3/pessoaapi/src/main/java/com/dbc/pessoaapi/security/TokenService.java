@@ -2,36 +2,61 @@ package com.dbc.pessoaapi.security;
 
 import com.dbc.pessoaapi.entity.UsuarioEntity;
 import com.dbc.pessoaapi.service.UsuarioService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import java.util.Base64;
-import java.util.Optional;
+import java.util.Collections;
+import java.util.Date;
 
 @Service
 @RequiredArgsConstructor
 public class TokenService {
 
+    private static final String TOKEN_PREFIX = "Bearer ";
+
     private final UsuarioService usuarioService;
 
+    @Value("${jwt.secret}")
+    private String secret;
+
+    @Value("${jwt.expiration}")
+    private String expiration;
+
     public String getToken(UsuarioEntity usuario){
-        String tokenTexto = usuario.getLogin() + ";" + usuario.getSenha();
-        String token = Base64.getEncoder().encodeToString(tokenTexto.getBytes());
-        return token;
+        final Date now = new Date();
+        final Date exp = new Date(now.getTime() + Long.valueOf(expiration));
+        String token =  Jwts.builder()
+                .setIssuer("vemser-api")
+                .claim(Claims.ID, usuario.getIdUsuario())
+                .setIssuedAt(now)
+                .setExpiration(exp)
+                .signWith(SignatureAlgorithm.HS256, secret)
+                .compact();
+        return TOKEN_PREFIX + token;
     }
 
-    public Optional<UsuarioEntity> isValid(String token){
+    public UsernamePasswordAuthenticationToken isValid(String token){
         if(token == null) {
-            return Optional.empty();
+            return null;
         }
-
-        byte[] decodeBytes = Base64.getUrlDecoder().decode(token);
-        String decoded = new String(decodeBytes);
-        String[] split = decoded.split(";");
-
-        return usuarioService.findByLoginAndSenha(split[0], split[1]);
-
+        Claims body = Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                .getBody();
+        Integer idUsuario = body.get(Claims.ID, Integer.class);
+        if(idUsuario != null){
+            return new UsernamePasswordAuthenticationToken(
+                        idUsuario,
+                        null,
+                        Collections.emptyList()
+                    );
+        }
+        return null;
     }
 
 }
