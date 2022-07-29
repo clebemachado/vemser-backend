@@ -28,6 +28,7 @@ public class TokenAutorizationFilter extends OncePerRequestFilter {
 
         UsernamePasswordAuthenticationToken userName =
                 tokenService.isValid(token);
+
         SecurityContextHolder.getContext().setAuthentication(userName);
 
         filterChain.doFilter(request, response);

@@ -13,10 +13,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.Optional;
 
@@ -32,6 +30,11 @@ public class AuthController {
     private final TokenService tokenService;
 
     private final AuthenticationManager authenticationManager;
+
+    @GetMapping("/logado")
+    public ResponseEntity<UsuarioDTO> estaLogado() throws RegraDeNegocioException {
+        return ResponseEntity.ok(usuarioService.getLoggedUser());
+    }
 
     @PostMapping("/create-user")
     public ResponseEntity<UsuarioDTO> createUser(@RequestBody UsuarioCreateDTO usuarioCreateDTO){

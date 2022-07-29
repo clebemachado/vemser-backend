@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +33,8 @@ public class TokenService {
     public String getToken(UsuarioEntity usuario){
         final Date now = new Date();
         final Date exp = new Date(now.getTime() + Long.valueOf(expiration));
+
+
         String token =  Jwts.builder()
                 .setIssuer("vemser-api")
                 .claim(Claims.ID, usuario.getIdUsuario())
