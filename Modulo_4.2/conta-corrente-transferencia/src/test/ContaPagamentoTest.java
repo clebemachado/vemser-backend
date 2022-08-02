@@ -1,4 +1,4 @@
-package teste;
+package test;
 
 import abstracts.Conta;
 import models.ContaCorrente;

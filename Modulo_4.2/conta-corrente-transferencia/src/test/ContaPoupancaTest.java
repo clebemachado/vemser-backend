@@ -1,4 +1,4 @@
-package teste;
+package test;
 
 import models.ContaCorrente;
 import models.ContaPagamento;
@@ -14,7 +14,7 @@ public class ContaPoupancaTest {
 
         // SETUP
         ContaPoupanca contaPoupanca = new ContaPoupanca();
-        contaPoupanca.setSaldo(100.00);
+        contaPoupanca.setSaldo(valorSaldo);
 
         // TAXA * SAQUE = 100.00 * 1.01 = 101
         contaPoupanca.creditarTaxa();
@@ -34,7 +34,7 @@ public class ContaPoupancaTest {
     public void deveTestarSaqueContaPoupancaSemSaldo(){
         // SETUP
         ContaPoupanca contaPoupanca = new ContaPoupanca();
-        contaPoupanca.setSaldo(100.00);
+        contaPoupanca.setSaldo(valorSaldo);
 
         // TAXA * SAQUE = 100.00 * 1.01 = 101.00
         contaPoupanca.creditarTaxa();
