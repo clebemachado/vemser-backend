@@ -85,17 +85,15 @@ db.playlist.insertMany(
 
 
 // Filtra as playlist com musicas com popularidade menor ou igual a 65
-db.collection.find({
-  musicas: {
-    $lt: {
-      popularity: 61
-    }
+db.playlist.find({
+  "musicas.popularity": {
+    $lte: 65
   }
 })
 
 
 // Filtrar as playlist pelo nome
-db.collection.find({
+db.playlist.find({
   nome: {
     "$regex": "musicas para*",
     "$options": "i"
