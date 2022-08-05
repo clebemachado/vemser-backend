@@ -93,7 +93,15 @@ db.javafy.insertMany(
 				{
 					_id: 4,
 					nome: "Acadenua musica",
-					musicas: []
+					musicas: [
+						{
+							_id: "6SRWhUJcD2YKahCwHavz3X",
+							name: "Darkside",
+							disc_number: 1,
+							popularity: 74,
+							preview_url: "https://p.scdn.co/mp3-preview/b5e08f76dc4dab3e678030570da21472990d761e?cid=68e29005ed5d4c838871f76bd274f6b8"
+						}
+					]
 				}
 			]	  
 		}
