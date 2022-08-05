@@ -115,6 +115,19 @@ db.javafy.find( { "playlist.musicas": {$size: 0 }})
 db.javafy.find({ _id: 1 }, {_id: 0, nome: 1, genero: 1, "playlist.nome": 1})
 db.javafy.find({ genero: "M" }, {_id: 0, nome: 1, genero: 1, "playlist.nome": 1})
 
+
+// Update
+db.javafy.updateOne(
+   { nome: "Maslow" },
+   {
+     $set: { "email": "maslinho@faker.com"}
+   }
+)
+
+// Deletar
+db.javafy.deleteOne( { nome: "Maslow" } )
+
+
 db.javafy.aggregate(
 	{$unwind: "$playlist"},
 	{$project: {"nome": "$playlist.nome"}} 
