@@ -15,7 +15,7 @@ public class ProdutorController {
 
     @PostMapping("/enviar")
     public void enviarMensagemParaOTopico(String mensagem){
-        produtorService.enviarMensagemKafka(mensagem);
+        produtorService.enviarMensagemViaKafka(mensagem);
     }
 
 }

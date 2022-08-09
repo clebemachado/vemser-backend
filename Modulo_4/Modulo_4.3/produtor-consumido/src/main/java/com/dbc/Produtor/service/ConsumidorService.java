@@ -13,13 +13,13 @@ import org.springframework.stereotype.Service;
 public class ConsumidorService {
 
     @KafkaListener(
-            topics = "${kafka.topic}",
+            topics = "${kafka.topico}",
             groupId = "group1",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "primeiroTopico")
-    public void consumir(@Payload String mensagem,
+    public void consumirMensagem(@Payload String mensagem,
                          @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                          @Header(KafkaHeaders.OFFSET) Long offset){
-        log.info("####{consume} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
+        log.info("{COMSUMER} offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, mensagem);
     }
 }

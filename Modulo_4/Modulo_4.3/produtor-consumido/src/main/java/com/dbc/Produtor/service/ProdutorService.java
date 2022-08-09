@@ -21,10 +21,10 @@ public class ProdutorService {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${kafka.topic}")
+    @Value("${kafka.topico}")
     private String topico;
 
-    public void enviarMensagemKafka(String mensagem) {
+    public void enviarMensagemViaKafka(String mensagem) {
         MessageBuilder<String> stringMessageBuilder = MessageBuilder.withPayload(mensagem)
                 .setHeader(KafkaHeaders.TOPIC, topico)
                 .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString());
@@ -35,7 +35,7 @@ public class ProdutorService {
         future.addCallback(new ListenableFutureCallback<>() {
             @Override
             public void onSuccess(SendResult result) {
-                log.info("LOG{ texto enviado:  " + mensagem + " }");
+                log.info("LOG <PRODUCTO>{ texto enviado:  " + mensagem + " }");
             }
 
             @Override
