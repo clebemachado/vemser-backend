@@ -23,7 +23,7 @@ public class ChatController {
     @PostMapping("/enviar-msg")
     public void enviarMensagem(
             @RequestBody MensagemDTO mensagemDTO,
-            @RequestParam("Opcoes de Envio")
+            @RequestParam("OpcoesEnvio")
                     Set<OpcoesEnvio> opcoesEnvios) throws JsonProcessingException {
         producerService.enviarDadosVeiculoViaKafka(mensagemDTO, opcoesEnvios);
     }
