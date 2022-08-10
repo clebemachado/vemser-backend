@@ -1,7 +1,7 @@
 package com.chat.chatkafta.service;
 
 import com.chat.chatkafta.dto.MensagemDTO;
-import com.chat.chatkafta.interfaces.ChatConsumerInteface;
+import com.chat.chatkafta.interfaces.ChatConsumerInterface;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ChatConsumerService implements ChatConsumerInteface {
+public class ChatConsumerService implements ChatConsumerInterface {
 
     private final ObjectMapper objectMapper;
 
@@ -42,11 +42,11 @@ public class ChatConsumerService implements ChatConsumerInteface {
         MensagemDTO mensagemDTO = getMensagemDTO(mensagem);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        log.info("{ " +
+        log.info(
                 mensagemDTO.getDataCriacao().format(formatter) + " [" +
                 mensagemDTO.getUsuario() + "] " +
                 formato + ": " +
-                mensagemDTO.getMensagem() + " }"
+                mensagemDTO.getMensagem()
         );
     }
 
