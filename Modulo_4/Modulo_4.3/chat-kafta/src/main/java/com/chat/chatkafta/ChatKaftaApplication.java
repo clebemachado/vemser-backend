@@ -1,14 +1,13 @@
-package com.dbc.Produtor;
+package com.chat.chatkafta;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProdutorConsumido{
+public class ChatKaftaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProdutorConsumido.class, args);
+		SpringApplication.run(ChatKaftaApplication.class, args);
 	}
-
 
 }
