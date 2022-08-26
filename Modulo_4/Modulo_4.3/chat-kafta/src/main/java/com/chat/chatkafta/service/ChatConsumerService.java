@@ -24,21 +24,16 @@ public class ChatConsumerService implements ChatConsumerInterface {
         return objectMapper.readValue(mensagem, MensagemDTO.class);
     }
 
-    public void consumirMensagemGeral(@Payload String mensagem,
-                                 @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
-                                 @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
+    public void consumirMensagemGeral(@Payload String mensagem) throws JsonProcessingException {
         mostrarLog(mensagem, "");
     }
 
-    public void consumirMensagemUsuario(@Payload String mensagem,
-                                      @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
-                                      @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
+    public void consumirMensagemUsuario(@Payload String mensagem) throws JsonProcessingException {
         mostrarLog(mensagem, "(privado)");
-
-
     }
 
     private void mostrarLog(String mensagem, String formato) throws JsonProcessingException {
+
         MensagemDTO mensagemDTO = getMensagemDTO(mensagem);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 

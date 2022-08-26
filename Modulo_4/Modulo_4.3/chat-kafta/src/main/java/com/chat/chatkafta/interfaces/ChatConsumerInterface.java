@@ -13,17 +13,13 @@ public interface ChatConsumerInterface {
             groupId = "${kafka.client-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "topicogeral")
-    public void consumirMensagemGeral(@Payload String mensagem,
-                                 @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
-                                 @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException;
+    public void consumirMensagemGeral(@Payload String mensagem) throws JsonProcessingException;
 
     @KafkaListener(
             topics = "${kafka.topico.usuario}",
             groupId = "${kafka.client-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "topicousuario")
-    public void consumirMensagemUsuario(@Payload String mensagem,
-                                      @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
-                                      @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException;
+    public void consumirMensagemUsuario(@Payload String mensagem) throws JsonProcessingException;
 
 }
